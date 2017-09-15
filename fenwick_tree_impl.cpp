@@ -27,33 +27,6 @@ using namespace std;
 #include <unordered_set> // unordered_set
 #include <vector>   // vector
 
-
-// in input
-//      check data types
-//      0
-//      equal elements
-// process
-//      get correct logic
-//      cumulative & binary search?
-// in output
-//      0
-// check array boundaries, else crashes
-// a condition missed?
-// += instead of ++?
-// problem's limits might be wrong, increase the datatypes (int to long, example)
-
-// WRITE TEST CASES
-// AT LEAST 5 good ones
-
-// if x & y are combined, then have
-//		all x
-//		all y
-//		start x, some y, some x
-//		start y, some x, some y
-//		some x, some y
-//		some y, some x
-// for loop, inner for loop? inner continue to end?
-
 bool ON = 1;
 bool OFF = 0;
 
