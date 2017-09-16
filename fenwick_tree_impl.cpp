@@ -1,7 +1,6 @@
-// samplecpphr2.cpp : Defines the entry point for the console application.
 //
-// #include "stdafx.h"
-
+// beautiful code
+//
 
 using namespace std;
 
@@ -213,12 +212,12 @@ public:
 		// query a range - queries two ranges that start from begin, and some operation (like diff) gives result
 		query_range_BITarray(6, 7);
 
+		cout << endl << endl;
+
 		return;
 
-		cout << endl << endl;
-		/* needs work */
 		// udate a range - this seems to be different, depending on if there will be a point query or range query for the rest of the calls
-		// range_update___needs_work(6, 7, 1);
+		// range_update___point_query(6, 7, 1);
 	}
 
 	void construct_BIT_array() {
@@ -347,7 +346,7 @@ query operations
 	// range query BIT  get summary of all between from and to indexes  uses point query BIT
 	VBigType query_range_BITarray(NType ib_from, NType ib_to) {
 		cout
-			<< "[" << ib_from << ", " << ib_to << "]"
+			<< "[" << ib_from << ", " << ib_to << "]"//
 			<< " = [1, " << ib_to << "]" << " - " << "[1, " << ib_from - 1 << "]";
 
 		print_BIT_array();
@@ -373,19 +372,38 @@ query operations
 		return sum;
 	}
 
-	void range_update___needs_work(NType from_index_to_update1, NType to_index_to_update1, NType Ai, bool indent_print_everything = false) {
+	void range_update___point_query(NType iL, NType iR, NType Ai) {
 		/* needs work */
-		cout << "** RANGE UPDATE BITree **  [" << from_index_to_update1 << "," << to_index_to_update1 << "] = " << Ai << endl;
+		cout << "** RANGE UPDATE BITree **  [" << iL << "," << iR << "] = " << Ai << endl;
 		// update [6,7] by 1
 		//   = Update(6, 1)
 		//        and Update(7 + 1, -1), i.e.Update(8, -1)
 
-		// Update(6, 1)
-		update_array__refresh_BITtree(from_index_to_update1, Ai);
-		//        and Update(7 + 1, -1), i.e.Update(8, -1)
-		update_array__refresh_BITtree(to_index_to_update1 + 1, -Ai);
 
-		query_range_BITarray(from_index_to_update1, to_index_to_update1);
+
+		/*
+		when we add update L
+			updates all elements the way up the tree root (to right end of array)
+		
+		since we want only till R, anything R should be removed, so (R+1) and above (or right of R to end of array)
+			we need to remove the update
+
+		so,
+			update (iL, with val) - add iL to end of array (even after R)
+			update (iR+1, with -val) - removes previous after R updates of above
+
+		ofcourse all because we are re-using existing update
+			we would have stopped after R in the first place
+		*/
+
+
+
+		// Update(6, 1)
+		update_array__refresh_BITtree(iL, Ai);
+		//        and Update(7 + 1, -1), i.e.Update(8, -1)
+		update_array__refresh_BITtree(iR + 1, -Ai);
+
+		query_range_BITarray(iL, iR);
 	}
 };
 
