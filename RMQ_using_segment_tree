@@ -2,8 +2,6 @@
 // beautiful code
 //
 
-#include "stdafx.h"
-
 #include <algorithm>  // min
 #include <bitset>
 #include <cassert>  // assert
@@ -104,30 +102,33 @@ vector <T> one_till(T N) {
 //#define SumOfLTypeVal unsigned long long
 
 // #define PTypeVal unsigned long long
-#define NTypeVal long
-#define EleTypeVal long
+#define NTypeVal int
+#define EleTypeVal int
 #define EleTypeVeryLargVal unsigned long long
 // #define SizeT unsigned int
 // -----------------------------------
 
-
+/*
 struct Node
 {
 	NTypeVal i;
 	EleTypeVal d;
 	Node *l, *r, *p;	// left, right, parent
 };
-
+*/
 
 template <class NType, class EleType>
 class seg_tree {
 
 	NType N;
 	EleType Ai;
-	vector<NType> v1;   // input array, with N+1 elements - element at index 0, is not used
-	vector<NType> v_seg;  // v_seg array, with N+1 elements - element at index 0, is not used
+	deque<NType> v1;   // input array, with N+1 elements - element at index 0, is not used
 
-	unordered_multimap <NTypeVal, pair<NTypeVal, EleTypeVal>> m1;
+	deque<NType> v_seg;  // v_seg array, with N+1 elements - element at index 0, is not used
+	deque<deque<NType>> v_seg2;  // v_seg array, with N+1 elements - element at index 0, is not used
+
+	// unordered_set <EleType> s1;
+	// unordered_multimap <NTypeVal, pair<NTypeVal, EleTypeVal>> m1;
 	// unordered_map <pair<NTypeVal, NTypeVal >, EleTypeVal> m1;
 
 	// unordered_multimap <NTypeVal, pair<NTypeVal, EleTypeVal>>
@@ -136,30 +137,12 @@ class seg_tree {
 	//NType   least_gr_eq_ri;
 	//EleType least_gr_eq_rmin;
 
-	struct Node* getNewNode(EleType &data1, NType &index1) {
-		struct Node* temp = new Node();
-
-		temp->i = index1;
-		temp->d = data1;
-
-		temp->l = NULL;
-		temp->r = NULL;
-		temp->p = NULL;
-
-		return temp;
-	}
-
-	struct Node *root = NULL, *right_most = NULL;
-
 public:
 
 	seg_tree(istream &cin) {
 		cin >> N;
 
-		v1.reserve(N);
-
-		v_seg.resize(4 * N);
-		fill(v_seg.begin(), v_seg.end(), numeric_limits<EleType>::max());
+		// v1.reserve(N);
 
 		// get arr
 		for (NType i = 0; i <= N - 1; i++) {
@@ -167,18 +150,20 @@ public:
 			v1.push_back(Ai);
 		}
 
-		// build seg arr
-		build_seg_tree(0, N - 1, 0);
-
 		///////// cout << one_till(N) << endl;
 		// cout << v1 << endl;
 		// cout << setw(4) << Ai << " ";
 	}
 
+	void build_for_seg_tree_RMQ_wrapper() {
+		// build seg arr
+		v_seg.resize(4 * N);
+		fill(v_seg.begin(), v_seg.end(), numeric_limits<EleType>::max());
+		build_for_seg_tree_RMQ(0, N - 1, 0);
+	}
 
-	// a_low, a_high & a_mid	are indexes of array
-	// s_i			is	index	of segtree array
-	void build_seg_tree(const NType &a_low, const NType &a_high, const NType &s_i) {
+	// a_low, a_high & a_mid are indexes of array, and   s_i is index of segtree array
+	void build_for_seg_tree_RMQ(const NType &a_low, const NType &a_high, const NType &s_i) {
 
 		if (a_low == a_high) {
 			v_seg[s_i] = v1[a_low];
@@ -188,14 +173,25 @@ public:
 		auto a_mid = (a_low + a_high) / 2;
 
 		// build left and right seg trees
-		build_seg_tree(a_low, a_mid, 2 * s_i + 1);			// s_i * 2 + 1 is left  child (1 initially)
-		build_seg_tree(a_mid + 1, a_high, 2 * s_i + 2);	// s_i * 2 + 2 is right child (2 initially)
+		build_for_seg_tree_RMQ(a_low, a_mid, 2 * s_i + 1);			// s_i * 2 + 1 is left  child (1 initially)
+		build_for_seg_tree_RMQ(a_mid + 1, a_high, 2 * s_i + 2);	// s_i * 2 + 2 is right child (2 initially)
 
 		// update parent in seg tree from its children
 		v_seg[s_i] = min(v_seg[2 * s_i + 1], v_seg[2 * s_i + 2]);
 	}
 
-	EleType range_min_query__slow(
+	void seg_tree_RMQ_wrapper() {
+
+		for (NType ql = 0; ql <= N - 1; ql++) {
+			for (NType qh = ql; qh <= N - 1; qh++) {
+
+				auto min = seg_tree_RMQ(ql, qh, 0, N - 1, 0);
+				cout << "[" << ql << "," << qh << "] = " << min << endl;
+			}
+		}
+	}
+
+	EleType seg_tree_RMQ(
 		const NType &q_low, const NType &q_high,	// query		low high
 		const NType &s_low, const NType &s_high,	// seg array	low high
 		const NType &s_i							// seg array	position
@@ -218,28 +214,17 @@ public:
 
 		// partial overlap, so get min of both
 		return min(
-			range_min_query__slow(q_low, q_high, s_low, s_mid, 2 * s_i + 1),		// s_i * 2 + 1 is left  child (1 initially)
-			range_min_query__slow(q_low, q_high, s_mid + 1, s_high, 2 * s_i + 2)	// s_i * 2 + 2 is right child (2 initially)
+			seg_tree_RMQ(q_low, q_high, s_low, s_mid, 2 * s_i + 1),		// s_i * 2 + 1 is left  child (1 initially)
+			seg_tree_RMQ(q_low, q_high, s_mid + 1, s_high, 2 * s_i + 2)	// s_i * 2 + 2 is right child (2 initially)
 		);
 
 	}
 
-	void print_array_indexes() {
-		stringstream output;
-		output << "index:       ";
-		for (int i = 1; i <= N; i++) { output << left << setw(4) << i; }
-		cout << output.str() << endl;
-	}
-
 	void doMain() {
-		// TODO
-		//////// CHECK EQUAL ELEMENTS
 
-		build_seg_tree(0, N - 1, 0);
-	  auto min = range_min_query__slow(0, N - 1, 0, N - 1, 0);
-		cout << min << endl;
+		build_for_seg_tree_RMQ_wrapper();
+		seg_tree_RMQ_wrapper();
 
-		return;
 	}
 };
 
@@ -280,23 +265,7 @@ vector < pair < vector<string>, vector<ReturnCountTypeValue >>> tests = {
 	}*/
 };
 
-template <class NType, class EleType>
-class ClsMain1 {
-	NType N;
-	// deque<PType> p1;
-public:
-
-	ClsMain1() {
-	}
-
-	void doMain(istream &cin) {
-		seg_tree <NType, EleType> o1(cin);
-		o1.doMain();
-	}
-};
-
 // template <class NType, class VType, class PType, class DType>
-
 template <class NType, class EleType>
 class Cls1 {
 
@@ -331,8 +300,8 @@ public:
 		// LOGS = 0;
 
 
-		ClsMain1 <NType, EleTypeVal> p1;
-		p1.doMain(cin);
+		seg_tree <NType, EleType> o1(cin);
+		o1.doMain();
 
 
 		auto actual_result = 0;
@@ -344,18 +313,19 @@ public:
 };
 
 
-ifstream ifs;
 int main() {
 
-	if (DEBUG_MODE) {
+	if (!DEBUG_MODE) {
+
+		Cls1<NTypeVal, EleTypeVal> o;
+		o.testFunction(cin);
+
+		return 0;
+	}
+	else {
 
 		for (unsigned long i = 0; i < tests.size(); i++) {
 			// debug("----------------------- input getting ready ----------------------------- ", "\n");
-
-
-
-				/*{
-				}*/
 
 			auto input = tests[i].first;
 			auto expected_output = tests[i].second;
@@ -369,16 +339,17 @@ int main() {
 			}
 
 			/*
+			ifstream ifs;
 			// ifs.open("../lr_input09_dummy.txt");
 			ifs.open("../lr_input09.txt");
 			string temp;
 			vector<string> a;
 			getline(ifs, temp); 	ss << temp << endl;
 			getline(ifs, temp); 	ss << temp << endl;
-	*/
+			*/
 
 
-	// debug("----------------------- input ready ----------------------------- ", "\n");
+			// debug("----------------------- input ready ----------------------------- ", "\n");
 
 			Cls1<NTypeVal, EleTypeVal> o;
 			// Cls1<NTypeVal, VTypeVal, PTypeVal, DTypeVal> o;
@@ -394,18 +365,10 @@ int main() {
 			//            }
 
 			// break;
-		}
-	}
-	else {
 
-		//        PTypeVal q;
-		//        cin >>q;
+		} // for tests.size()
 
-		Cls1<NTypeVal, EleTypeVal> o;
-		// Cls1<NTypeVal, VTypeVal, PTypeVal, DTypeVal> o;
-		// Cls1<NTypeVal, LTypeVal> o;
-		o.testFunction(cin);
-
+		return 0;
 	}
 
 	return 0;
