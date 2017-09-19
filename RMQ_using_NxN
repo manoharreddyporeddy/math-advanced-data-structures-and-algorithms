@@ -2,8 +2,6 @@
 // beautiful code
 //
 
-#include "stdafx.h"
-
 #include <algorithm>  // min
 #include <bitset>
 #include <cassert>  // assert
