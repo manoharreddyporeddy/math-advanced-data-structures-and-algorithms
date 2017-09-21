@@ -14,29 +14,30 @@ void know_bits_and_bytes() {
 }
 
 
-/*
+/X
 hackerrank
 	size of char:                 -128 127
 	size of unsigned char:         0 255
-	size of short:                -32768 32767
-	size of unsigned short:        0 65535
-	size of int:                  -2.14748e+09 2.14748e+09
-	size of unsigned int:          0 4.29497e+09
-	size of long:                 -9.22337e+18 9.22337e+18
-	size of unsigned long:         0 1.84467e+19
-	size of long long:            -9.22337e+18 9.22337e+18
-	size of unsigned long long:    0 1.84467e+19
+	size of short:                -32768 32767                     // 3 X 10^4
+	size of unsigned short:        0 65535                         // 6 X 10^4
+	size of int:                  -2.14748e+09 2.14748e+09         //   2 X 10^9
+	size of unsigned int:          0 4.29497e+09                   //   4 X 10^9
+	size of long:                 -9.22337e+18 9.22337e+18         //     9 X 10^18
+	size of unsigned long:         0 1.84467e+19                   //     1 X 10^19
+	size of long long:            -9.22337e+18 9.22337e+18         // 9 X 10^18
+	size of unsigned long long:    0 1.84467e+19                   // 1 X 10^19
 
-local machine
+	// summary:   long  and  long long  are same on hackerrank --- so use (short, int, long) only for integers, signed or unsigned as required
+
+local machine/ laptop
 	size of char:                 -128 127
 	size of unsigned char:         0 255
-	size of short:                -32768 32767
-	size of unsigned short:        0 65535
-	size of int:                  -2.14748e+09 2.14748e+09
-	size of unsigned int:          0 4.29497e+09
-	size of long:                 -2.14748e+09 2.14748e+09
-	size of unsigned long:         0 4.29497e+09
-	size of long long:            -9.22337e+18 9.22337e+18
-	size of unsigned long long:    0 1.84467e+19
-*/
-
+	size of short:                -32768 32767                      // 3 X 10^4
+	size of unsigned short:        0 65535                          // 6 X 10^4
+	size of int:                  -2.14748e+09 2.14748e+09          //   2 X 10^9
+	size of unsigned int:          0 4.29497e+09                    //   4 X 10^9
+	size of long:                 -2.14748e+09 2.14748e+09          //     2 X 10^9
+	size of unsigned long:         0 4.29497e+09                    //     4 X 10^9
+	size of long long:            -9.22337e+18 9.22337e+18          // 9 X 10^18
+	size of unsigned long long:    0 1.84467e+19                    // 1 X 10^19	
+X/
