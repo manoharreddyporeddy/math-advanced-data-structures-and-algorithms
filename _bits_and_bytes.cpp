@@ -14,7 +14,7 @@ void know_bits_and_bytes() {
 }
 
 
-/X
+/*
 hackerrank
 	size of char:                 -128 127
 	size of unsigned char:         0 255
@@ -40,4 +40,4 @@ local machine/ laptop
 	size of unsigned long:         0 4.29497e+09                    //     4 X 10^9
 	size of long long:            -9.22337e+18 9.22337e+18          // 9 X 10^18
 	size of unsigned long long:    0 1.84467e+19                    // 1 X 10^19	
-X/
+*/
