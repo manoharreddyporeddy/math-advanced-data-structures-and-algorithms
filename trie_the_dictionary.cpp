@@ -306,18 +306,9 @@ vector < pair < vector<string>, vector<ReturnCountTypeValue >>> tests = {
 			"find lo"
 		},
 		{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)		5*10 = 50
-	},
+	}
 
-	{
-		{
-			"4",
-			"add hack",
-			"add hackerrank",
-			"find hac",
-			"find hak"
-		},
-			{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)		5*10 = 50
-	},
+	
 
 };
 
