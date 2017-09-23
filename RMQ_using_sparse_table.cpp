@@ -206,18 +206,19 @@ public:
 		// b(
 
 		NType log2N = (NType)log2(N);
-		log2N = (NType)pow(2, log2N);
+		NType pow2_lessthan_len_of_query = (NType)pow(2, log2N);
 
 		sparse_table_arr.push_back(move(v1));
-		for (NType pw2len = 1; pw2len < log2N; pw2len = 2 * pw2len) {	// 1, 2, 4, 8, 16
+		for (NType pw2len = 1; pw2len < pow2_lessthan_len_of_query; pw2len = 2 * pw2len) {	// 1, 2, 4, 8, 16
 
 			auto i_st_prev_row = sparse_table_arr.size() - 1;
 			auto st_prev_row_arr_size = sparse_table_arr[i_st_prev_row].size();
 
-			deque <EleType> v;
-			v.resize(st_prev_row_arr_size - pw2len);
+
+			deque <EleType> v(st_prev_row_arr_size - pw2len);
+			// deque <EleType> v;	v.resize(st_prev_row_arr_size - pw2len);
 			for (NType i = 0; i < st_prev_row_arr_size - pw2len; i++) {
-				// v.push_back(min(sparse_table_arr[i_st_prev_row][i], sparse_table_arr[i_st_prev_row][i + pw2len]));
+
 				v[i] = min(
 					sparse_table_arr[i_st_prev_row][i],
 					sparse_table_arr[i_st_prev_row][i + pw2len]
@@ -260,18 +261,19 @@ public:
 		// qlefti
 		// qrighti
 		// sparse_table_arr
-		NType len_of_query = qrighti - qlefti;
-		NType log2N = (NType)log2(len_of_query);
-		NType a = (NType)pow(2, log2N);
+		NType len_of_query = qrighti - qlefti + 1;
+		NType log2N_len_of_query = (NType)log2(len_of_query);
+		NType pow2_lessthan_len_of_query = (NType)pow(2, log2N_len_of_query);
 
 		NType prefix_left = qlefti;
-		NType prefix_right = qlefti + a - 1;
-		NType suffix_left = qrighti - a + 1;
+		NType prefix_right = qlefti + pow2_lessthan_len_of_query - 1;
+		NType suffix_left = qrighti - pow2_lessthan_len_of_query + 1;
 		NType suffix_right = qrighti;
 
-		EleType a1 = sparse_table_arr[log2N][prefix_left];
-		EleType a2 = sparse_table_arr[log2N][suffix_left];
-		EleType min1 = min(a1, a2);
+		EleType min__in_pow2len__1 = sparse_table_arr[log2N_len_of_query][prefix_left];
+		EleType min__in_pow2len__2 = sparse_table_arr[log2N_len_of_query][suffix_left];
+
+		EleType min1 = min(min__in_pow2len__1, min__in_pow2len__2);
 
 		return min1;
 	}
