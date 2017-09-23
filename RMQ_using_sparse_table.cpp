@@ -2,9 +2,7 @@
 // beautiful code
 //
 
-// #include "stdafx.h"
-
-#include <algorithm>  // min, min
+#include <algorithm>  // max, max
 #include <bitset>
 #include <cassert>  // assert
 #include <cmath>
@@ -133,11 +131,13 @@ Node *l, *r, *p;	// lefti, righti, parent
 template <class NType, class EleType, class NTypeBig, class EleTypeBig>
 class sparse_table {
 
-	NType N, i, j;	// ai * aj <= min (ai .. aj),	i<j
+	NType N, i, j;	// ai * aj <= max (ai .. aj),	i<j
 	EleType ai;
 
-	deque<EleType> v1;			// input array, with N elements
-	deque<deque<EleType>> sparse_table_arr;	// sparse_table_arr array,	with N elements	// all initially 0, it does not matter what values they have as they will be filled from v1
+	vector<EleType> v1;			// input array, with N elements
+	vector<vector<EleType>> _sparse_table_;	// _sparse_table_ array,	with N elements	// all initially 0, it does not matter what values they have as they will be filled from v1
+
+	vector<NType> _log2floor_table_;
 
 	// unordered_set <EleType> s1;
 	// unordered_multimap <NTypeVal, pair<NTypeVal, EleTypeVal>> m1;
@@ -145,35 +145,41 @@ class sparse_table {
 	// unordered_multimap <NTypeVal, pair<NTypeVal, EleTypeVal>>
 	// pair<NTypeVal, EleTypeVal> least_gr_eq;
 	// NType   least_gr_eq_ri;
-	// EleType least_gr_eq_rmin;
+	// EleType least_gr_eq_rmax;
 
 public:
 
 	sparse_table(istream &cin) {
+		/*
+				cout << left << setw(30) << "size of char: " << "-" << pow(2, 8 * sizeof(char) - 1) << " " << pow(2, 8 * sizeof(char) - 1) - 1 << endl;
+				cout << left << setw(30) << "size of unsigned char: " << " " << 0 << " " << pow(2, 8 * sizeof(unsigned char)) - 1 << endl;
+				cout << left << setw(30) << "size of short: " << "-" << pow(2, 8 * sizeof(short) - 1) << " " << pow(2, 8 * sizeof(short) - 1) - 1 << endl;
+				cout << left << setw(30) << "size of unsigned short: " << " " << 0 << " " << pow(2, 8 * sizeof(unsigned short)) - 1 << endl;
+				cout << left << setw(30) << "size of int: " << "-" << pow(2, 8 * sizeof(int) - 1) << " " << pow(2, 8 * sizeof(int) - 1) - 1 << endl;
+				cout << left << setw(30) << "size of unsigned int: " << " " << 0 << " " << pow(2, 8 * sizeof(unsigned int)) - 1 << endl;
+				cout << left << setw(30) << "size of long: " << "-" << pow(2, 8 * sizeof(long) - 1) << " " << pow(2, 8 * sizeof(long) - 1) - 1 << endl;
+				cout << left << setw(30) << "size of unsigned long: " << " " << 0 << " " << pow(2, 8 * sizeof(unsigned long)) - 1 << endl;
+				cout << left << setw(30) << "size of long long: " << "-" << pow(2, 8 * sizeof(long long) - 1) << " " << pow(2, 8 * sizeof(long long) - 1) - 1 << endl;
+				cout << left << setw(30) << "size of unsigned long long: " << " " << 0 << " " << pow(2, 8 * sizeof(unsigned long long)) - 1 << endl;
 
-		//cout << lefti << setw(30) << "size of char: " << "-" << pow(2, 8 * sizeof(char) - 1) << " " << pow(2, 8 * sizeof(char) - 1) - 1 << endl;
-		//cout << lefti << setw(30) << "size of unsigned char: " << " " << 0 << " " << pow(2, 8 * sizeof(unsigned char)) - 1 << endl;
-		//cout << lefti << setw(30) << "size of short: " << "-" << pow(2, 8 * sizeof(short) - 1) << " " << pow(2, 8 * sizeof(short) - 1) - 1 << endl;
-		//cout << lefti << setw(30) << "size of unsigned short: " << " " << 0 << " " << pow(2, 8 * sizeof(unsigned short)) - 1 << endl;
-		//cout << lefti << setw(30) << "size of int: " << "-" << pow(2, 8 * sizeof(int) - 1) << " " << pow(2, 8 * sizeof(int) - 1) - 1 << endl;
-		//cout << lefti << setw(30) << "size of unsigned int: " << " " << 0 << " " << pow(2, 8 * sizeof(unsigned int)) - 1 << endl;
-		//cout << lefti << setw(30) << "size of long: " << "-" << pow(2, 8 * sizeof(long) - 1) << " " << pow(2, 8 * sizeof(long) - 1) - 1 << endl;
-		//cout << lefti << setw(30) << "size of unsigned long: " << " " << 0 << " " << pow(2, 8 * sizeof(unsigned long)) - 1 << endl;
-		//cout << lefti << setw(30) << "size of long long: " << "-" << pow(2, 8 * sizeof(long long) - 1) << " " << pow(2, 8 * sizeof(long long) - 1) - 1 << endl;
-		//cout << lefti << setw(30) << "size of unsigned long long: " << " " << 0 << " " << pow(2, 8 * sizeof(unsigned long long)) - 1 << endl;
+				cout << left << setw(30) << "size of char: " << "-" << 1 << (sizeof(char)) << " " << 1 << (sizeof(char)) - 1 << endl;
+				cout << left << setw(30) << "size of unsigned char: " << " " << 0 << " " << 1 << (sizeof(unsigned char)) - 1 << endl;
+				cout << left << setw(30) << "size of short: " << "-" << 1 << (sizeof(short)) << " " << 1 << (sizeof(short)) - 1 << endl;
+				cout << left << setw(30) << "size of unsigned short: " << " " << 0 << " " << 1 << (sizeof(unsigned short)) - 1 << endl;
+				cout << left << setw(30) << "size of int: " << "-" << 1 << (sizeof(int)) << " " << 1 << (sizeof(int)) - 1 << endl;
+				cout << left << setw(30) << "size of unsigned int: " << " " << 0 << " " << 1 << (sizeof(unsigned int)) - 1 << endl;
+				cout << left << setw(30) << "size of long: " << "-" << 1 << (sizeof(long)) << " " << 1 << (sizeof(long)) - 1 << endl;
+				cout << left << setw(30) << "size of unsigned long: " << " " << 0 << " " << 1 << (sizeof(unsigned long)) - 1 << endl;
+				cout << left << setw(30) << "size of long long: " << "-" << 1 << (sizeof(long long)) << " " << 1 << (sizeof(long long)) - 1 << endl;
+				cout << left << setw(30) << "size of unsigned long long: " << " " << 0 << " " << 1 << (sizeof(unsigned long long)) - 1 << endl;
+				*/
 
-		// c(
+				// c(
 
 		cin >> N;
+		// v1.resize(N);
 
-		v1.resize(N);
-		// sparse_table_arr.resize(4 * N);
 
-		// get arr
-		for (NType i = 0; i <= N - 1; i++) {
-			cin >> ai;
-			v1[i] = ai;
-		}
 
 		// v1 = { 1,3,5,7,9,11 };
 		// v1 = { 5,6,4 ,1,7, 1,3,2 };
@@ -182,128 +188,101 @@ public:
 		// cout << v1 << endl;
 		// cout << setw(4) << ai << " ";
 
-		build__sparse_table_arrment_tree__for_Range_Query_Max__wrapper();
-		//for (NType i = 0; i < sparse_table_arr.size(); i++) {
-		//	cout << sparse_table_arr[i] << endl;
+		build___sparse_table_ment_tree__for_Range_Query_Max__wrapper(cin);
+		//for (NType i = 0; i < _sparse_table_.size(); i++) {
+		//	cout << _sparse_table_[i] << endl;
 		//}
 	}
 
-	void build__sparse_table_arrment_tree__for_Range_Query_Max__wrapper() {
-		build__sparse_table__for_Range_Max_Query(0, N - 1, 0);
+	void build___sparse_table_ment_tree__for_Range_Query_Max__wrapper(istream &cin) {
+		build__sparse_table__for_Range_Max_Query(cin);
 	}
 
 	///////// TODO
-	//////////// vector or deque??
+	//////////// when vector or deque?
 	///////// TODO
 
 
 
 	// alefti, arighti & a_mid are indexes of array
-	// sposi is index of sparse_table_arrtree array
+	// sposi is index of _sparse_table_tree array
 	// NOTE: sposi runs as if it is BFS
-	void build__sparse_table__for_Range_Max_Query(const NType &alefti, const NType &arighti, const NType &sposi) {
+	void build__sparse_table__for_Range_Max_Query(istream &cin) {
 
 		// b(
 
-		NType log2N = (NType)log2(N);
-		NType pow2_lessthan_len_of_query = (NType)pow(2, log2N);
+		// create log table - begin
+		// See: http://www.rapidtables.com/math/algebra/logarithm/Logarithm_Table.htm
+		_log2floor_table_.resize(N + 1, 0);
+		for (NType i = 2; i < _log2floor_table_.size(); i++) {
+			_log2floor_table_[i] = _log2floor_table_[i / 2] + 1;
+		}
+		// create log table - end
 
-		sparse_table_arr.push_back(move(v1));
-		for (NType pw2len = 1; pw2len < pow2_lessthan_len_of_query; pw2len = 2 * pw2len) {	// 1, 2, 4, 8, 16
+		_sparse_table_.resize(_log2floor_table_[N] + 1, vector<EleType>(N));	// _sparse_table_.resize(4 * N);
 
-			auto i_st_prev_row = sparse_table_arr.size() - 1;
-			auto st_prev_row_arr_size = sparse_table_arr[i_st_prev_row].size();
+		// _sparse_table_.resize(_log2floor_table_[N] + 1);
 
+		// _sparse_table_[0].resize(N);
+		for (NType i = 0; i <= N - 1; i++) {
+			cin >> _sparse_table_[0][i];
+		}
 
-			deque <EleType> v(st_prev_row_arr_size - pw2len);
-			// deque <EleType> v;	v.resize(st_prev_row_arr_size - pw2len);
-			for (NType i = 0; i < st_prev_row_arr_size - pw2len; i++) {
+		for (NType row = 1; row < _sparse_table_.size(); row++) {	// 1, 2, 3, 4
+			// _sparse_table_[row].resize(N - ((1 << row) - 1));
 
-				v[i] = min(
-					sparse_table_arr[i_st_prev_row][i],
-					sparse_table_arr[i_st_prev_row][i + pw2len]
-				);
+			for (NType i = 0; i + (1 << row) <= N; i++) {
+				_sparse_table_[row][i] = max(_sparse_table_[row - 1][i], _sparse_table_[row - 1][i + (1 << (row - 1))]);
 			}
-
-			sparse_table_arr.push_back(v);
 		}
 	}
 
-
-	void range_min_query__all() {
-
-		/*
-		for (NType qlefti = 0; qlefti <= N - 1; qlefti++) {
-			range_min_query(qlefti, qlefti, 0, N - 1, 0);
-		}
-		return;
-		*/
-
-		/*
-			for (NType qlefti = 0; qlefti <= N - 1; qlefti++) {
-				for (NType qrighti = qlefti; qrighti <= N - 1; qrighti++) {
-
-					EleType min = range_min_query(qlefti, qrighti, 0, N - 1, 0);
-					cout << "[" << qlefti << "," << qrighti << "] = " << min << endl;
-				}
-			}
-			*/
+	void range_max_query__all() {
 	}
 
-	EleType range_min_query(
-		const NType &qlefti, const NType &qrighti,	// query		low high
-		const NType &slefti, const NType &srighti,	// sparse_table_arr array	low high
-		const NType &sposi							// sparse_table_arr array	posiition
-	) {
+	EleType range_max_query(const NType &qli, const NType &qri) {
 
 		// q(
 
-		// qlefti
-		// qrighti
-		// sparse_table_arr
-		NType len_of_query = qrighti - qlefti + 1;
-		NType log2N_len_of_query = (NType)log2(len_of_query);
-		NType pow2_lessthan_len_of_query = (NType)pow(2, log2N_len_of_query);
-
-		NType prefix_left = qlefti;
-		NType prefix_right = qlefti + pow2_lessthan_len_of_query - 1;
-		NType suffix_left = qrighti - pow2_lessthan_len_of_query + 1;
-		NType suffix_right = qrighti;
-
-		EleType min__in_pow2len__1 = sparse_table_arr[log2N_len_of_query][prefix_left];
-		EleType min__in_pow2len__2 = sparse_table_arr[log2N_len_of_query][suffix_left];
-
-		EleType min1 = min(min__in_pow2len__1, min__in_pow2len__2);
-
-		return min1;
+		EleType max1 = max(
+			_sparse_table_[_log2floor_table_[qri - qli + 1]][qli],
+			_sparse_table_[_log2floor_table_[qri - qli + 1]][qri - (1 << _log2floor_table_[qri - qli + 1]) + 1]
+		);
+		return max1;
 	}
 
 	void doMain(istream & cin) {
 
-		// range_min_query__all();
-		EleType min = range_min_query(0, 6, 0, N - 1, 0);
+		// m(
+
+		// range_max_query__all();
+		// EleType max = range_max_query(0, 6, 0, N - 1, 0);
 
 		for (NType i = 0; i <= N - 1; i++) {
-			for (NType j = i; j <= N - 1; j++) {
+			for (NType j = i + 1; j <= N - 1; j++) {
 
-				EleType min = range_min_query(i, j, 0, N - 1, 0);
-				cout << "[" << i << "," << j << "] = " << min << endl;
+				EleType max = range_max_query(i, j);
+				cout << "[" << i << "," << j << "] = " << max << endl;
 
-				// build__sparse_table_arrment_tree__for_Range_Query_Max__wrapper();
+				// build___sparse_table_ment_tree__for_Range_Query_Max__wrappe r();
 				// range_update__wrapper(i, j, ai);
-				// range_min_query__all();
+				// range_max_query__all();
 			}
 		}
 		cout << endl;
 
-		// range_min_query__all();
-		// cout << sparse_table_arr[0][0] << endl;
+		// range_max_query__all();
+		// cout << _sparse_table_[0][0] << endl;
 	}
 };
 
 // testsss
 #define ReturnCountTypeValue char
 vector < pair < vector<string>, vector<ReturnCountTypeValue >>> tests = {
+
+
+
+
 
 	/*
 	even
@@ -315,13 +294,15 @@ vector < pair < vector<string>, vector<ReturnCountTypeValue >>> tests = {
 	2powlen 8 ->  1 +
 	*/
 
-		{
+	{
 			{
 				"8",
 				"5 2  4 7  6 3  1 2"
 			},
 			{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)		5*10 = 50
 		},
+
+
 	/*
 	odd
 
@@ -333,13 +314,30 @@ vector < pair < vector<string>, vector<ReturnCountTypeValue >>> tests = {
 	2powlen 8 ->
 
 	*/
+
+
+	/*
+{
+	{
+		"5",
+		"1 1 2 4 2"
+	},
+	{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)		5*10 = 50
+},
+*/
+
+
+
+
+
+/*
+	{
 		{
-			{
-				"7",
-					"5 2  4 6 3  1 2"
-			},
-			{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)		5*10 = 50
+			"7",
+				"5 2  4 6 3  1 2"
 		},
+		{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)		5*10 = 50
+	},*/
 	/*
 		{
 			{
@@ -426,7 +424,6 @@ public:
 		// LOGS = 0;
 
 
-		// m(
 
 		sparse_table <NTypeVal, EleTypeVal, NTypeValBig, EleTypeValBig> o1(cin);
 		o1.doMain(cin);
