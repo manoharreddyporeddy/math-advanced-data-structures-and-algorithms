@@ -270,6 +270,22 @@ public:
 			}
 		}
 		cout << endl;
+		
+		/*
+		for (NType len = 0; len <= N - 1; len++) {
+
+			for (NType i = 0; i + len <= N - 1; i++) {
+
+				// expanding on X - 1,1   2,2   3,3 ..  then  1,2   2,3   3,4
+				EleType max1 = range_max_query(i, i + len);
+				cout << "[" << i << "," << i + len << "]=" << max1 << "  ";
+
+			}
+			cout << endl;
+		}
+		cout << endl;
+		*/
+		
 
 		// range_max_query__all();
 		// cout << _sparse_table_[0][0] << endl;
