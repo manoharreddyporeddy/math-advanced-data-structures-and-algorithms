@@ -2,8 +2,6 @@
 // beautiful code
 //
 
-#include "stdafx.h"
-
 #include <algorithm>  // min
 #include <bitset>
 #include <cassert>  // assert
@@ -114,80 +112,59 @@ Node *l, *r, *p;	// left, right, parent
 
 // #define PTypeVal unsigned long long
 // #define EleTypeVal unsigned long long
-// #define EleTypeVeryLargVal unsigned long long
+// #define EleTypeValBig unsigned long long
 // #define SizeT unsigned int
 
 #define NTypeVal unsigned int
+#define NTypeValBig unsigned long long
 #define EleTypeVal unsigned long
-#define NTypeValBig unsigned long
-#define EleTypeValBig unsigned long
+#define EleTypeValBig unsigned long long
 
 template <class NType, class EleType, class NTypeBig, class EleTypeBig>
-class seg_tree {
+class seg_tree_lazy {
+	bool is_lazy;
 
-	NType N, i, j;	// ai * aj <= max (ai .. aj),	i<j
-	EleType ai;
-
-	vector<EleType> v1;			// input array, with N elements
-	vector<EleTypeBig> seg;	// seg array,	with N elements	// all initially 0, it does not matter what values they have as they will be filled from v1
-
-	/////////////////// LAZY REQUIRED
-	vector<EleTypeBig> lazy;	// seg array,	with N elements	// same as above
-
-	// unordered_set <EleType> s1;
-	// unordered_multimap <NTypeVal, pair<NTypeVal, EleTypeVal>> m1;
-	// unordered_map <pair<NTypeVal, NTypeVal >, EleTypeVal> m1;
-	// unordered_multimap <NTypeVal, pair<NTypeVal, EleTypeVal>>
-	// pair<NTypeVal, EleTypeVal> least_gr_eq;
-	// NType   least_gr_eq_ri;
-	// EleType least_gr_eq_rmin;
+	NType N, i, j;
+	vector<EleType> v1;		// input array, with N elements
+	vector<EleType> seg;		// seg array,	with N elements	// all initially 0, it does not matter what values they have as they will be filled from v1
+	vector<EleType> lazy;	// lazy seg array,	with N elements	// same as above
 
 public:
 
-	seg_tree(istream &cin) {
+	seg_tree_lazy(istream &cin) {
 
-		//cout << left << setw(30) << "size of char: " << "-" << pow(2, 8 * sizeof(char) - 1) << " " << pow(2, 8 * sizeof(char) - 1) - 1 << endl;
-		//cout << left << setw(30) << "size of unsigned char: " << " " << 0 << " " << pow(2, 8 * sizeof(unsigned char)) - 1 << endl;
-		//cout << left << setw(30) << "size of short: " << "-" << pow(2, 8 * sizeof(short) - 1) << " " << pow(2, 8 * sizeof(short) - 1) - 1 << endl;
-		//cout << left << setw(30) << "size of unsigned short: " << " " << 0 << " " << pow(2, 8 * sizeof(unsigned short)) - 1 << endl;
-		//cout << left << setw(30) << "size of int: " << "-" << pow(2, 8 * sizeof(int) - 1) << " " << pow(2, 8 * sizeof(int) - 1) - 1 << endl;
-		//cout << left << setw(30) << "size of unsigned int: " << " " << 0 << " " << pow(2, 8 * sizeof(unsigned int)) - 1 << endl;
-		//cout << left << setw(30) << "size of long: " << "-" << pow(2, 8 * sizeof(long) - 1) << " " << pow(2, 8 * sizeof(long) - 1) - 1 << endl;
-		//cout << left << setw(30) << "size of unsigned long: " << " " << 0 << " " << pow(2, 8 * sizeof(unsigned long)) - 1 << endl;
-		//cout << left << setw(30) << "size of long long: " << "-" << pow(2, 8 * sizeof(long long) - 1) << " " << pow(2, 8 * sizeof(long long) - 1) - 1 << endl;
-		//cout << left << setw(30) << "size of unsigned long long: " << " " << 0 << " " << pow(2, 8 * sizeof(unsigned long long)) - 1 << endl;
+		is_lazy = true;
 
 		cin >> N;
 
 		v1.resize(N);
-		seg.resize(4 * N);
-		/////////////////// LAZY REQUIRED
-		// lazy.resize(4 * N);
 
-		// get arr
 		for (NType i = 0; i <= N - 1; i++) {
-			cin >> ai;
-			v1[i] = ai;
+			cin >> v1[i];
 		}
 
-		// v1 = { 1,3,5,7,9,11 };
-		// v1 = { 5,6,4 ,1,7, 1,3,2 };
-		// v1 = { 1,4,2,3 };
-		// cout << one_till(N) << endl;
-		// cout << v1 << endl;
-		// cout << setw(4) << ai << " ";
-
-		build__segment_tree__for_Range_Query_Max__wrapper();
+		build__segment_tree_for_range_max_query_wrapper();
 	}
 
-	void build__segment_tree__for_Range_Query_Max__wrapper() {
-		build__segment_tree__for_Range_Max_Query(0, N - 1, 0);
+	void build__segment_tree_for_range_max_query_wrapper() {
+
+		seg.resize(4 * N);
+		if (is_lazy) {
+			lazy.resize(4 * N);
+		}
+
+		// fill(seg.begin(), seg.end(), numeric_limits<EleType>::min());
+
+		build__segment_tree_for_range_max_query(0, N - 1, 0);
 	}
 
-	// aleft, aright & a_mid are indexes of array
-	// spos is index of segtree array
-	// NOTE: spos runs as if it is BFS
-	void build__segment_tree__for_Range_Max_Query(const NType &aleft, const NType &aright, const NType &spos) {
+	// aaaaaaaaaaaaaaaa
+	// aaaaaaaaaaaaaaaa
+	// aaaaaaaaaaaaaaaa
+
+	// aleft, aright & amid are indexes of array
+	// spos is index of segtree array. NOTE: spos runs as if it is BFS
+	void build__segment_tree_for_range_max_query(const NType &aleft, const NType &aright, const NType &spos) {
 
 		// not possible
 		if (aleft > aright) {
@@ -200,15 +177,14 @@ public:
 			return;
 		}
 
-		NType a_mid = aleft + (aright - aleft) / 2;
+		NType amid = aleft + (aright - aleft) / 2;
 
-		// build left  sub seg tree
-		build__segment_tree__for_Range_Max_Query(aleft, a_mid, 2 * spos + 1);			// spos * 2 + 1 is left  child (1 initially)
-		// build right sub seg tree
-		build__segment_tree__for_Range_Max_Query(a_mid + 1, aright, 2 * spos + 2);	// spos * 2 + 2 is right child (2 initially)
+		// build left and right seg trees
+		build__segment_tree_for_range_max_query(aleft, amid, 2 * spos + 1);			// spos * 2 + 1 is left  child (1 initially)
+		build__segment_tree_for_range_max_query(amid + 1, aright, 2 * spos + 2);	// spos * 2 + 2 is right child (2 initially)
 
-		// update parent from roots of left & right sub seg trees
-		seg[spos] = max(seg[2 * spos + 1], seg[2 * spos + 2]);   // NOTE: max here, since in future we have to do Range_Max_Query
+																					// update parent in seg tree from its children
+		seg[spos] = max(seg[2 * spos + 1], seg[2 * spos + 2]);
 	}
 
 	void range_update__wrapper(const NType &uleft, const NType &uright, const EleType &ele) {
@@ -265,26 +241,6 @@ public:
 		);
 	}
 
-	void range_max_query__all() {
-
-		/*
-		for (NType qleft = 0; qleft <= N - 1; qleft++) {
-			range_max_query(qleft, qleft, 0, N - 1, 0);
-		}
-		return;
-		*/
-
-		/*
-			for (NType qleft = 0; qleft <= N - 1; qleft++) {
-				for (NType qright = qleft; qright <= N - 1; qright++) {
-
-					EleType min = range_max_query(qleft, qright, 0, N - 1, 0);
-					cout << "[" << qleft << "," << qright << "] = " << min << endl;
-				}
-			}
-			*/
-	}
-
 	EleType range_max_query(
 		const NType &qleft, const NType &qright,	// query		low high
 		const NType &sleft, const NType &sright,	// seg array	low high
@@ -296,9 +252,9 @@ public:
 			return numeric_limits<EleType>::min();
 		}
 
-		/////////////////// LAZY REQUIRED
-		if (0) {
-			// propogate any pending updates
+		if (is_lazy) {		/////////////////// LAZY REQUIRED
+
+							// propogate any pending updates
 			if (lazy[spos]) {
 				seg[spos] += lazy[spos];
 				if (sleft != sright) {
@@ -322,8 +278,9 @@ public:
 			return seg[spos];
 		}
 
-		// seg has partial overlap, so get min of both
+		// seg has partial overlap, so get max of both
 		NType smid = (sleft + sright) / 2;
+
 		return max(
 			range_max_query(qleft, qright, sleft, smid, 2 * spos + 1),		// spos * 2 + 1 is left  child (1 initially)
 			range_max_query(qleft, qright, smid + 1, sright, 2 * spos + 2)	// spos * 2 + 2 is right child (2 initially)
@@ -333,77 +290,79 @@ public:
 
 	void doMain(istream & cin) {
 
+		// range_update__wrapper(1, 2, 3);
+		// range_update__wrapper(i, j, 3);
+
 		// range_max_query__all();
 
-		for (NType i = 0; i <= N - 1; i++) {
-			for (NType j = i + 1; j <= N - 1; j++) {
+		for (NType qleft = 0; qleft <= N - 1; qleft++) {
+			for (NType qright = qleft + 1; qright <= N - 1; qright++) {
 
-				EleType max = range_max_query(i, j, 0, N - 1, 0);
-				cout << "[" << i << "," << j << "] = " << max << endl;
-
-				// build__segment_tree__for_Range_Query_Max__wrapper();
-				// range_update__wrapper(i, j, ai);
-				// range_max_query__all();
+				EleType max = range_max_query(qleft, qright, 0, N - 1, 0);
+				cout << "[" << qleft << "," << qright << "] = " << max << endl;
 			}
 		}
 
-		// range_max_query__all();
 		cout << seg[0] << endl;
 	}
 };
 
 // testsss
+// testsss
+// testsss
+// testsss
+
 #define ReturnCountTypeValue char
 vector < pair < vector<string>, vector<ReturnCountTypeValue >>> tests = {
 	/*	{
-			{
-				"5",
-				"5 10 40 30 28"
-			},
-			{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)
-		}, */
-		/*
-		*/
-		/*	{
-				{
-					"4 3",
-					"0 3 3",
-					"0 3 1",
-					"0 0 2"
-				},
-				{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)		5*10 = 50
-			},
-			{
-				{
-					"8 3",
-					"0 3 3",
-					"0 3 1",
-					"0 0 2"
-				},
-				{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)		5*10 = 50
-			},*/
-			{
-				{
-					"5",
-					"1 1 2 4 2"
-				},
-				{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)		5*10 = 50
-			},
-	/*
 	{
-					{
-						"12",
-							"9 3  7 1 8  12 12 10 20  15 18 5"
-					},
-					{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)	6*10 = 50
-				},
-
-{
+	"5",
+	"5 10 40 30 28"
+	},
+	{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)
+	}, */
+	/*
+	*/
+	/*	{
+	{
+	"4 3",
+	"0 3 3",
+	"0 3 1",
+	"0 0 2"
+	},
+	{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)		5*10 = 50
+	},
+	{
+	{
+	"8 3",
+	"0 3 3",
+	"0 3 1",
+	"0 0 2"
+	},
+	{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)		5*10 = 50
+	},*/
+	{
 		{
 			"5",
-			"1 2 3 4 5"
+			"1 1 2 4 2"
 		},
-		{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)
+		{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)		5*10 = 50
+	},
+	/*
+	{
+	{
+	"12",
+	"9 3  7 1 8  12 12 10 20  15 18 5"
+	},
+	{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)	6*10 = 50
+	},
+
+	{
+	{
+	"5",
+	"1 2 3 4 5"
+	},
+	{ 0, 0, 0, 0, 0, 0, 0, 0 } // 4(new) 3 (old)
 	}*/
 };
 
@@ -414,7 +373,6 @@ class Cls1 {
 	// deque <pair<VType, NType > > p1;
 	//    XType x;
 	//    string S;
-	//    LenType ai;
 	//    TType type;
 	//    HVType v;
 	//    VType v;
@@ -440,7 +398,7 @@ public:
 		// LOGS = 0;
 
 
-		seg_tree <NTypeVal, EleTypeVal, NTypeValBig, EleTypeValBig> o1(cin);
+		seg_tree_lazy <NTypeVal, EleTypeVal, NTypeValBig, EleTypeValBig> o1(cin);
 		o1.doMain(cin);
 
 
@@ -495,11 +453,11 @@ int main() {
 			// auto actual_result = o.testFunction(cin, q)[0];
 			auto actual_result = o.testFunction(cin)[0];
 
-			//            for (PTypeVal ai = 0; ai < q; ai++) {
+			//            for (PTypeVal k = 0; k < q; k++) {
 			//            Cls1<NTypeVal, LTypeVal, TTypeVal> o;
-			//                // // debug("\tactual_result ", actual_result, " ", "expected_output ", expected_output[ai], "\n");
+			//                // // debug("\tactual_result ", actual_result, " ", "expected_output ", expected_output[k], "\n");
 			//
-			//                // assert(actual_result == expected_output[ai]);
+			//                // assert(actual_result == expected_output[k]);
 			//            }
 
 			// break;
