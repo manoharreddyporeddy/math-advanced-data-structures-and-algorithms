@@ -104,7 +104,7 @@ So, +V to [i to j] came down to above
 These above 4 formulas are for range_update(i,j,V).
 
 So, you will need to arrays of size A[], however update of range (i,j) should be logN for BITX1 & another logN for BITX2
-which is 2*logN, still O(logN), faster than O(N) updating all values of (i,j), so above <Tranformation formula> is key
+which is 2*logN, still O(logN), faster than O(N) updating all values of (i,j), so above 'Tranformation formula' is key
 ___
 
 </pre>
