@@ -1,6 +1,5 @@
 <pre>
 
-/*
 Logic for Point & Range update
 =====
 NOTE: This is in progress.
@@ -41,21 +40,23 @@ ___
 i                  0  1  2  3  4  5  6  7   8   9
 A[i]               0  0  0  0  0  0  0  0   0   0
 SumTill[i]         0  0  0  0  0  0  0  0   0   0
-___               
+___
 Now +5 to [3 to 7]
-___               
+___
 i                  0  1  2  3  4  5  6  7   8   9
 A[i]               0  0  0  5  5  5  5  5   0   0
 SumTill[i]         0  0  0  5 10 15 20 25  25  25
-___               
-Here              
-___               
+___
+Here
+___
 SumTill[i]         0  0  0  5 10 15 20 25  25  25
-is                
+is
 i                  0  1  2  3  4  5  6  7   8   9
 X1[i]             *0  0  0  5  5  5  5  5   0   0
 X2[i]             +0  0  0 10 10 10 10 10 -25 -25
-.         Where, SumTill[i] = i * X1[i] - X2[i]   --- This will not be used anywhere below, this helps to derive BIT form
+.
+. Where, SumTill[i] = i * X1[i] - X2[i], This will not be used anywhere below, but is key to derive BIT form
+.
 ___
 Here
 ___
@@ -79,7 +80,7 @@ BITX1[7+1] =  -5
 BITX2[3]   = +10
 BITX2[7+1] = -35
 So, +5 to [3 to 7] came down to above.
-this is range_update(3,7,5).
+These above 4 are formulas are range_update(3,7,5).
 ___
 
 Exact above (in general form) looks like:
@@ -99,9 +100,7 @@ BITX1[j+1] +=        -V
 BITX2[i]   +=  +(i-1)*V
 BITX2[j+1] +=      -j*V
 So, +V to [i to j] came down to above
-this is range_update(i,j,V).
+These above 4 are formulas are range_update(i,j,V).
 ___
-
-*/
 
 </pre>
