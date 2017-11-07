@@ -2,7 +2,7 @@
 
 Logic for Point & Range update
 =====
-If you liked, click the Star above, so it will help others too.
+If you liked this, click the Star above, so it will help others too.
 Since this is in progress, if you already forked this repository, you would need to merge new changes from here to your forked ones in future if you need new changes.
 =====
 
