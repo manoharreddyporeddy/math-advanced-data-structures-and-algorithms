@@ -2,8 +2,7 @@
 
 Logic for Point & Range update
 =====
-If you liked this, click the Star above, so it will help others too.
-Since this is in progress, if you already forked this repository, you would need to merge new changes from here to your forked ones in future if you need new changes.
+Since this is in progress, if you already forked this repository, you would need to merge new changes from here to your forked ones in future if you need new changes. Obviously, if you liked this, click the Star above will help others find this page.
 =====
 
 ====================
@@ -105,7 +104,10 @@ BITX2[j+1] +=      -j*V
 So, +V to [i to j] came down to above
 These above 4 formulas are for range_update(i,j,V).
 
-So, you will need to arrays of size A[], however update of range (i,j) should be logN for BITX1 & another logN for BITX2
+So, you will need two arrays of size A[],
+however update of range (i,j)
+should be logN for BITX1 &
+another logN for BITX2
 which is 2*logN, still O(logN), faster than O(N) updating all values of (i,j), so above 'Tranformation formula' is key
 ___
 
