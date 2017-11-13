@@ -1,5 +1,12 @@
 <pre>
 
+Sources:
+https://en.wikipedia.org/wiki/Fenwick_tree
+http://www.geeksforgeeks.org/binary-indexed-tree-range-update-range-queries/
+https://cs.stackexchange.com/questions/33014/range-update-range-query-with-binary-indexed-trees
+
+
+=====
 Logic for Point & Range update
 =====
 Since this is in progress, if you already forked this repository, you would need to merge new changes from here to your forked ones in future if you need new changes. Obviously, if you liked this, click the Star above will help others find this page.
