@@ -1,5 +1,4 @@
 'use strict';
-let performance_timers = require('./basics_performance_timers');
 
 class sol {
 
@@ -29,19 +28,19 @@ class sol {
 
     runTests() {
         process.env.CS_TIME_LOGS = '1';
-        //        performance_timers.time('TIME TAKEN: test: ');
-        //        performance_timers.timeEnd('TIME TAKEN: test: ');
-        //        performance_timers.time('TIME TAKEN: test: ');
-        //        performance_timers.timeEnd('TIME TAKEN: test: ');
+        //        console.time('TIME TAKEN: test: ');
+        //        console.timeEnd('TIME TAKEN: test: ');
+        //        console.time('TIME TAKEN: test: ');
+        //        console.timeEnd('TIME TAKEN: test: ');
 
-        performance_timers.time('TIME TAKEN: n_factorial: ');
+        console.time('TIME TAKEN: n_factorial: ');
         console.log("n_factorial(13): " + this.n_factorial(5));
-        performance_timers.timeEnd('TIME TAKEN: n_factorial: ');
+        console.timeEnd('TIME TAKEN: n_factorial: ');
         console.log('a=' + sol.a + '\n');
 
-        performance_timers.time('TIME TAKEN: n_factorial_rec: ');
+        console.time('TIME TAKEN: n_factorial_rec: ');
         console.log("n_factorial_rec(13): " + this.n_factorial_rec(5));
-        performance_timers.timeEnd('TIME TAKEN: n_factorial_rec: ');
+        console.timeEnd('TIME TAKEN: n_factorial_rec: ');
         console.log('b=' + sol.b + '\n');
 
     }

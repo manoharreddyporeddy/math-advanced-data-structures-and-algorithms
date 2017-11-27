@@ -1,5 +1,4 @@
 'use strict';
-let performance_timers = require('./basics_performance_timers');
 
 class sol {
 
@@ -68,35 +67,35 @@ class sol {
 
     runTests() {
         process.env.CS_TIME_LOGS = '1';
-        //        performance_timers.time('TIME TAKEN: test: ');
-        //        performance_timers.timeEnd('TIME TAKEN: test: ');
-        //        performance_timers.time('TIME TAKEN: test: ');
-        //        performance_timers.timeEnd('TIME TAKEN: test: ');
+        //        console.time('TIME TAKEN: test: ');
+        //        console.timeEnd('TIME TAKEN: test: ');
+        //        console.time('TIME TAKEN: test: ');
+        //        console.timeEnd('TIME TAKEN: test: ');
 
-        performance_timers.time('TIME TAKEN: x_pow_n: ');
+        console.time('TIME TAKEN: x_pow_n: ');
         console.log("x_pow_n(13, 131): " + this.x_pow_n(13, 131));
-        performance_timers.timeEnd('TIME TAKEN: x_pow_n: ');
+        console.timeEnd('TIME TAKEN: x_pow_n: ');
         console.log('a=' + sol.a);
         console.log('\n');
 
-        performance_timers.time('TIME TAKEN: x_pow_n_rec: ');
+        console.time('TIME TAKEN: x_pow_n_rec: ');
         console.log("x_pow_n_rec(13, 131): " + this.x_pow_n_rec(13, 131));
-        performance_timers.timeEnd('TIME TAKEN: x_pow_n_rec: ');
+        console.timeEnd('TIME TAKEN: x_pow_n_rec: ');
         console.log('b=' + sol.b);
         console.log('\n');
 
-        performance_timers.time('TIME TAKEN: x_pow_n_rec: ');
+        console.time('TIME TAKEN: x_pow_n_rec: ');
         console.log("x_pow_n_rec_faster(13, 131): " + this.x_pow_n_rec_faster(13, 131));
-        performance_timers.timeEnd('TIME TAKEN: x_pow_n_rec: ');
+        console.timeEnd('TIME TAKEN: x_pow_n_rec: ');
         console.log('c=' + sol.c);
         console.log('\n');
 
 
-        performance_timers.time('TIME TAKEN: x_pow_n_rec: ');
+        console.time('TIME TAKEN: x_pow_n_rec: ');
         // console.log("modular_exponentiation__x_pow_n_modulo_m(5, 2, 7): " + this.modular_exponentiation__x_pow_n_modulo_m(5, 2, 7));  // 4
         // console.log("modular_exponentiation__x_pow_n_modulo_m(5, 3, 7): " + this.modular_exponentiation__x_pow_n_modulo_m(5, 3, 7));  // 6
         console.log("modular_exponentiation__x_pow_n_modulo_m(5, 3, 7): " + this.modular_exponentiation__x_pow_n_modulo_m(13, 131, 7));  // 6
-        performance_timers.timeEnd('TIME TAKEN: x_pow_n_rec: ');
+        console.timeEnd('TIME TAKEN: x_pow_n_rec: ');
         console.log('d=' + sol.d);
         console.log('\n');
     }
