@@ -93,4 +93,9 @@ percent . base = amount
 
 ~	approximately equal
 
+====
+
+shares of stock = how much a person (shareholder) owns in a company
+    profits (dividends) can be equal or not
+
 </pre>
