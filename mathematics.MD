@@ -84,5 +84,13 @@ n^0 = 1		n!=0
 0^n=0	n!=0
 0^0 = undefined
 
+====
+25% of 600 is 150
+25% . 600 = 150
+percent . base = amount
+
+10% = 10/100 = 1/10 = 0.1
+
+~	approximately equal
 
 </pre>
