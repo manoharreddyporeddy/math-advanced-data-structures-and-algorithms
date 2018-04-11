@@ -69,6 +69,20 @@ Inequalities show the relation between two expressions that are not equal.
 independent variable is a variable that represents a quantity that is being manipulated in an experiment
 dependent variable represents a quantity whose value depends on how the independent variable is manipulated
 
+====
+0 is neither -ve or +ve
+0/n=0			n!=0 
+n/0=undefined
+0/0=undefined
+
+1*n = n
+1*0 = 0
+1*1 = 1
+
+n^1 = n
+n^0 = 1		n!=0
+0^n=0	n!=0
+0^0 = undefined
 
 
 </pre>
