@@ -1,4 +1,5 @@
 
+<pre>
 ====
 
 BODMAS is an acronym and it stands for Bracket, Of, Division, Multiplication, Addition and Subtraction.
@@ -43,3 +44,31 @@ distribution
 		cluster = grouping of data, between two data points, from x to y, saying 100 to 200
 		peak = most frequent data item
 		gap = (no values)?
+
+====
+algebra
+	variables
+	expressions
+	equations = a statement that two expressions are equal
+		value of the variable that makes a true equation is called a solution to the equation
+we always have to do the same thing to both sides of an equation to keep it true
+Addition and subtraction are inverse operations
+
+inverse operation of addition is subtraction
+inverse operation of subtraction is addition
+
+Multiplication and division are inverse operations
+inverse operation of division is multiplication
+inverse operation of multiplication is division
+
+Inequalities show the relation between two expressions that are not equal.
+
+> open circle and arrow
+>= closed circle and arrow
+
+independent variable is a variable that represents a quantity that is being manipulated in an experiment
+dependent variable represents a quantity whose value depends on how the independent variable is manipulated
+
+
+
+</pre>
