@@ -1,3 +1,45 @@
-================================================
+
+====
+
 BODMAS is an acronym and it stands for Bracket, Of, Division, Multiplication, Addition and Subtraction.
 In certain regions, PEDMAS (Parentheses, Exponents, Division, Multiplication, Addition and Subtraction) is the synonym of BODMAS.
+
+====
+
+non-statistical - single value like age
+statistical question - multiple values - need to gather info about 1+ items/people, etc.
+histogram
+
+mean		a+b+c+d)/4
+median		mid element, OR average(2 mid elements)
+mode 		most often
+range = max - min
+
+. interquartile range (IQR)
+. 	sort asc
+. 	find median
+. 	IQR = lower half's median - upper half's median
+
+box plot
+min		Q1					median	Q3				max
+min		lower quartile(		median	lower quartile	max
+
+. Mean absolute deviation (MAD)
+. 	find mean
+. 	average (abs   each ele - mean)
+
+double number lines - show the ratio
+dot plot - most often/ frequent, helps finding median, more than x, max and specific - below x
+bar graph/histogram - helps finding more than x, less than (some are good, some dont tell)
+box & whiskers plot - helps finding median
+
+distribution
+	left-tailed - decreasing towards left   (approximate: skewed to the left:  mean is to the left of median and mode)
+	right-tailed - decreasing towards right (approximate: skewed to the right: mean is to the right of median and mode)
+	approximately symmetrical - both left-tailed & right-tailed - median will be close to center
+
+	for dot plot (only?) we can see below:
+		outlier = an end element that is far to the right/left - isolated one data point (unusually low or unusually high)
+		cluster = grouping of data, between two data points, from x to y, saying 100 to 200
+		peak = most frequent data item
+		gap = (no values)?
