@@ -97,5 +97,13 @@ percent . base = amount
 
 shares of stock = how much a person (shareholder) owns in a company
     profits (dividends) can be equal or not
+====
+
+polyhedron
+polyhedra
+    3d shape
+    flat surfaces
+    straight edges
+Surface area is   the amount of space covering the outside of a three-dimensional shape.
 
 </pre>
