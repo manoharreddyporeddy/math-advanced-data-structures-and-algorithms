@@ -1,16 +1,16 @@
 
 <pre>
+
 ====
 This Mathematics Notes is from  khanacademy.org/math
 where I got Ramanujan in 60 actual days - possibly 3 hours of work everyday
 
 ====
-
 BODMAS is an acronym and it stands for Bracket, Of, Division, Multiplication, Addition and Subtraction.
-In certain regions, PEDMAS (Parentheses, Exponents, Division, Multiplication, Addition and Subtraction) is the synonym of BODMAS.
+In certain regions,
+  PEDMAS (Parentheses, Exponents, Division, Multiplication, Addition and Subtraction) is the synonym of BODMAS.
 
 ====
-
 non-statistical      - single value like age
 statistical question - multiple values - need to gather info about 1+ items/people, etc.
 
@@ -20,15 +20,15 @@ bar graph/histogram - helps finding more than x, less than (some are good, some 
 box & whiskers plot - helps finding median
 
 distribution
-    left-tailed - decreasing towards left   (approximate: skewed to the left:  mean is to the left of median and mode)
-    right-tailed - decreasing towards right (approximate: skewed to the right: mean is to the right of median and mode)
-    approximately symmetrical - both left-tailed & right-tailed - median will be close to center
-
-    for dot plot (only?) we can see below:
-        outlier = an end element that is far to the right/left - isolated one data point (unusually low or unusually high)
-        cluster = grouping of data, between two data points, from x to y, saying 100 to 200
-        peak = most frequent data item
-        gap = (no values)?
+  left-tailed - decreasing towards left   (approximate: skewed to the left:  mean is to the left  of median and mode)
+  right-tailed - decreasing towards right (approximate: skewed to the right: mean is to the right of median and mode)
+  approximately symmetrical - both left-tailed & right-tailed - median will be close to center
+ 
+  for dot plot (only?) we can see below:
+    outlier = an end element that is far to the right/left - isolated one data point (unusually low or unusually high)
+    cluster = grouping of data, between two data points, from x to y, saying 100 to 200
+    peak = most frequent data item
+    gap = (no values)?
 
 mean    (a+b+c+d)/4
 median  mid element, OR average(2 mid elements)
@@ -57,7 +57,7 @@ min     median      max
 .     find mean
 .     average (abs each ele - mean)
 
-======
+====
 algebra
     variables
     expressions
@@ -80,8 +80,8 @@ Inequalities show the relation between two expressions that are not equal.
 
 independent variable is a variable that represents a quantity that is being manipulated in an experiment
 dependent variable represents a quantity whose value depends on how the independent variable is manipulated
-====
 
+====
 0 is neither -ve or +ve
 0/n=0         where n != 0 
 n/0=undefined
@@ -107,12 +107,10 @@ percent . base = amount
 ~  approximately equal
 
 ====
-
 shares of stock = how much a person (shareholder) owns in a company
     profits (dividends) can be equal or not
 
 ====
-
 polyhedron
 polyhedra
     3d shape
@@ -127,7 +125,8 @@ use your calculator instead of given calculator - its a bit cramped
 
 How to work?
     instead of doing only arithmetic, OR geometry
-    i would do 1st class, then 2nd class, this looks a bit slow but they are better in understanding many things at little bit each
+    i would do 1st class, then 2nd class,
+		this looks a bit slow but they are better in understanding many things at little bit each
 
 verify
     after each answer
@@ -153,14 +152,14 @@ From 6th grade the volume of video seems very slow
     GOOD PLUGIN
         I used Volume Booster extension of Chrome browser
 		listen to video/audio sound a bit louder
-			https://chrome.google.com/webstore/detail/volume-booster/ejkiikneibegknkgimmihdpcbcedgmpo/related
+		https://chrome.google.com/webstore/detail/volume-booster/ejkiikneibegknkgimmihdpcbcedgmpo/related
     BAD PLUGIN
         I installed another chrome extension
 		https://chrome.google.com/webstore/detail/youtube-playback-speed-co/hdannnflhlmdablckfkjpleikpphncik/reviews?hl=en
-			and went at 2.25 speed
-			remembers speed 2.00    Options > Settings tab > 'Remember Playback Speed For All Videos'
-			but 2.25 failed
-			This failed as the points were not coming as usual
+		and went at 2.25 speed
+		remembers speed 2.00    Options > Settings tab > 'Remember Playback Speed For All Videos'
+		but 2.25 failed
+		This failed as the points were not coming as usual
 
 ====
 </pre>
