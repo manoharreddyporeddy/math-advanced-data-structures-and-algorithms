@@ -1,22 +1,30 @@
 
 
-void print() {
-	
-	printf("%c", 'c') ;
-	
-	cout << endl;
-	cout << "\n";
+	void print() {
 
-	cout << 'a' << "\n";
-	cout << "abc" << "\n";
-	cout << 1 << "\n";
-	
-	cout << "[" << 100 << "," << 200 << "]" << endl;
+		printf("%c", 'c');
 
-	cout << setw(10) << 100 << "\n";
-	cout << setw(10) << setfill('-') << 100 << "\n";
+		cout << endl;	// ok
+		cout << "\n";  // better sometimes for performance
 
-}
+		cout << 'a' << "\n";
+		cout << "abc" << "\n";
+		cout << 1 << "\n";
+
+		cout << "[" << 100 << "," << 200 << "]" << "\n";
+
+		cout << setw(10) << 100 << "\n";
+		cout << setw(10) << setfill('-') << 100 << "\n";
+
+
+		string s1 = "hello";
+		cout << s1 << "\n";
+
+		stringstream output1;
+		output1 << "hello" << "\n";
+		output1 << "world" << "\n";
+		cout << output1.str();
+	}
 
 
 	template <class T>
