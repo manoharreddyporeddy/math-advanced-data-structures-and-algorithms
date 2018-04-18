@@ -1,7 +1,15 @@
 
 
-void use() {
-     printf("%c", 'c') ;	
+void print() {
+	
+	printf("%c", 'c') ;
+	
+	cout << endl;
+	cout << "\n";
+
+	cout << 'a' << "\n";
+	cout << "abc" << "\n";
+	cout << 1 << "\n";
 }
 
 
