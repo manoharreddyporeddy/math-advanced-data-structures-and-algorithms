@@ -19,3 +19,13 @@
 			cout << "\n";
 		}
 	}
+
+	template <class T>
+	static void printVVDD(T vv1, bool bNewLine = true) { // print vector<vector<T>>, deque<deque<T>>
+		for (size_t i = 0; i < vv1.size(); i++) {
+			printVD(vv1[i], bNewLine);
+		}
+		if (bNewLine) {
+			cout << "\n";
+		}
+	}
