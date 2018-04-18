@@ -10,6 +10,10 @@ void print() {
 	cout << 'a' << "\n";
 	cout << "abc" << "\n";
 	cout << 1 << "\n";
+	
+	cout << setw(10) << 100 << "\n";
+	cout << setw(10) << setfill('-') << 100 << "\n";
+
 }
 
 
