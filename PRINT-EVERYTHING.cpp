@@ -34,3 +34,15 @@ void use() {
 			cout << "\n";
 		}
 	}
+
+	template <class T>
+	static void printM(const T &m1, bool bNewLine = true) {	// print map<T>
+		for (auto kv1 : m1) {
+			cout << kv1.first << " " << kv1.second << endl;
+		}
+		if (bNewLine) {
+			cout << "\n";
+		}
+	}
+
+
