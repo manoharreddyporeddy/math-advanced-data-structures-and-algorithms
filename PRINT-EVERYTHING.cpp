@@ -11,6 +11,8 @@ void print() {
 	cout << "abc" << "\n";
 	cout << 1 << "\n";
 	
+	cout << "[" << 100 << "," << 200 << "]" << endl;
+
 	cout << setw(10) << 100 << "\n";
 	cout << setw(10) << setfill('-') << 100 << "\n";
 
