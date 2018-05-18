@@ -27,13 +27,16 @@ Compound event  = combination of simple events
 A U B = occurence of A or  B
 A n B = occurence of A and B
 
-A U B = P(A) + P(B) - P(A n B)
+P(A U B) = P(A) + P(B) - P(A n B)
 
 Mutually exclusive (disjoint) events
  = No common outcomes of between A and B
   A n B  = Pi (empty set)
 P(A n B) = 0
 
+   P(A U B) = P(A) + P(B) - P(A n B)
+=> P(A U B) = P(A) + P(B) - 0
+=> P(A U B) = P(A) + P(B)
 
 
 </pre>
