@@ -24,6 +24,9 @@ then P(A) + P(A') = P(S)
 Simple event
 Compound event  = combination of simple events
 
+A U B = occurence of A or  B
+A n B = occurence of A and B
+
 A U B = P(A) + P(B) - P(A n B)
 
 
