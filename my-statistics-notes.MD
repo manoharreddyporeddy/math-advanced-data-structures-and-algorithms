@@ -18,5 +18,16 @@ P(A) = |A| / |S|
 if A and A' is S
 then P(A) + P(A') = P(S)
   => P(A) + P(A') = 1
+  => P(A') = 1 - P(A)
+
+
+Simple event
+Compound event  = combination of simple events
+
+A U B = P(A) + P(B) - P(A n B)
+
+
+
 
 </pre>
+
