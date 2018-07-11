@@ -1,0 +1,291 @@
+
+
+From: http://www.personal.kent.edu/~rmuhamma/Algorithms/MyAlgorithms/binarySearchTree.htm
+Index: http://www.personal.kent.edu/~rmuhamma/Algorithms/algorithm.html
+
+        19
+    11         35
+  7    16     23
+      13 17
+
+Binary Search Tree/ BST
+    binary_search_tree property.    
+        for each, internal node, say node
+            any node's key  in node's left  sub tree  is <= node
+            any node's key  in node's right sub tree  is >= node
+            
+    left  subtree < node
+    right subtree > node
+
+            19
+        11         35
+      7    16     23
+          13 17
+
+    NOTE:
+        in actual, <= and >= cannot exists same time.
+        so, one among below exists:
+            <= and >
+            OR
+            < and >=
+            OR
+            < and >
+
+    height =
+        number of links from root to deepest node
+
+    operations depend on height of tree
+        case                    worst-case time
+        complete binary tree    O(log N)
+        linear-chain tree       O(N)
+
+    node can have a
+            element (also called info, it will include either key/value)
+        and 3 pointer fields
+            left
+            right
+            parent        
+                parent is NULL for root
+                left & right are NULL for leafs
+    Walk
+    
+            //
+            // while the current node is not NULL, walk current node's left, then visit current node, then walk current node's right
+            //
+            inorder_walk (current_node)
+                if current_node is NOT NULL:
+                    inorder_walk (current_node's left)
+                    access current_node's key
+                    inorder_walk (current_node's right)
+            //
+            // call: inorder_walk(root)
+            // all nodes will be walked so it's O(N)
+            // the order is:    (left-subtree)current_node(right-subtree)
+            // if printed, will be ascending order
+            //
+
+            //
+            // while the current node is not NULL, visit current node, then walk current node's left, then walk current node's right
+            //
+            preorder_walk (current_node)
+                if current_node is NOT NULL:
+                    access current_node's key
+                    preorder_walk (current_node's left)
+                    preorder_walk (current_node's right)
+            //
+            // call: preorder_walk(root)
+            // all nodes will be walked so it's O(N)
+            // the order is:    current_node(left-subtree)(right-subtree)
+            //
+
+            //
+            // while the current node is not NULL, walk current node's left, then walk current node's right, then visit current node
+            //
+            postorder_walk (current_node)
+                if current_node is NOT NULL:
+                    postorder_walk (current_node's left)
+                    postorder_walk (current_node's right)
+                    access current_node's key
+            //
+            // call: postorder_walk(root)
+            // all nodes will be walked so it's O(N)
+            // the order is:    (left-subtree)(right-subtree)current_node
+            //
+
+
+Querying a Binary Search Tree
+MINIMUM, MAXIMUM, SUCCESSOR and PREDESESSOR
+O(h)
+    h is height of the tree i.e., the number of links root node to the deepest node.
+
+
+            // depending on the the given key to find, traverse down
+            //      traverse down to left, if key is < current node
+            //      traverse down to right, if key is > current node
+            //      else return node, that is, if key is = current node
+            bst_tree_search (current_node, key)
+                if current_node is NULL
+                    return current_node
+                    
+                if key == current_node's key:
+                    return current_node
+
+                if key < current_node's key:
+                    return bst_tree_search (current_node's left, key)
+                else
+                    return bst_tree_search (current_node's right, key)
+
+            bst_tree_search_iterative (current_node, key)
+            
+                while current_node != NULL  AND  key < current_node's key
+                    current_node = current_node's left
+                    
+                while current_node != NULL  AND  key > current_node's key
+                    current_node = current_node's right
+
+                if current_node == NULL:
+                    return current_node
+                    
+                if key == current_node's key:
+                    return current_node
+
+            // To get the minimum, go down to the left most element of the tree
+            // does not look at key
+            bst_tree_minimum (current_node)
+
+                if current_node == NULL:
+                    return current_node
+                
+                while current_node's left != NULL
+                    current_node = current_node's left
+                
+                return current_node
+
+
+            // To get the maximum, go down to the right most element of the tree
+            // does not look at key
+            bst_tree_maximum (current_node)
+
+                if current_node == NULL:
+                    return current_node
+                
+                while current_node's right != NULL
+                    current_node = current_node's right
+                
+                return current_node
+
+
+            // find node with  key just > current_node's key
+            //      it is either
+            //          minimum element of the right child's subtree, if right child exists
+            //          or
+            //          you go up from the node, until a node's parent's right child is not the node itself.
+            // does not look at key
+            bst_tree_successor (current_node)
+                
+                if current_node's right != NULL
+                    return bst_tree_minimum (current_node's right)
+                
+                // ** redundant **
+                // if current_node's parent != NULL  AND  current_node's parent's key > current_node's key // looks fine but we shudn't look at keys
+                if current_node's parent != NULL  AND  current_node's parent's left == current_node
+                    return current_node's parent
+
+                // while current_node's parent != NULL   AND  current_node's parent < current_node's key // looks fine but we shudn't look at keys
+                
+                while current_node's parent != NULL  AND  current_node's parent's right == current_node
+                    current_node = current_node's parent
+                
+                // current_node's parent's right is now NULL or other
+                
+                return current_node's parent
+
+            NOTE:
+            An inorder tree walk of an n-node BST
+                can be implemented in O(n)-time
+                by finding the minimum element in the tree with bst_tree_minimum(x) algorithm and
+                then making n-1 calls to bst_tree_successor (x).
+
+
+
+            // find node with  key just < current_node's key
+            //      it is either
+            //          maximum element of the left child's subtree, if left child exists
+            //          or
+            //          you go up from the node, until a node's parent's left child is not the node itself.
+            // does not look at key
+            bst_tree_predecessor (current_node)
+
+                if current_node's left != NULL
+                    return bst_tree_maximum (current_node's left)
+                
+                // ** redundant **
+                // if current_node's parent != NULL  AND  current_node's parent's key < current_node's key // looks fine but we shudn't look at keys
+                if current_node's parent != NULL  AND  current_node's parent's right == current_node
+                    return current_node's parent
+                
+                // while current_node's parent != NULL   AND  current_node's parent > current_node's key // looks fine but we shudn't look at keys
+                
+                while current_node's parent != NULL  AND  current_node's parent's left == current_node
+                    current_node = current_node's parent
+                    
+                // current_node's parent's left is now NULL or other
+
+                return current_node's parent
+
+
+            // go to leaf, add it
+            bst_tree_insert (current_node, node_to_insert)
+            
+                if current_node == NULL
+                    current_node = node_to_insert
+                    return
+                
+                while current_node != NULL
+                    current_node_parent = current_node
+                    
+                    if node_to_insert's key < current_node's key
+                        current_node = current_node's left
+                    else
+                        current_node = current_node's right
+
+                if node_to_insert's key < current_node_parent's key
+                    current_node_parent's left = node_to_insert
+                else
+                    current_node_parent's right = node_to_insert
+            // =====
+            // if the 1st element to insert is either smallest or biggest or near to them, the tree will be nearly single chain of node
+            //      in which case the build will take O(N^2), i.e. O(N) for each of the N elements, in actually 1,2,3...N insertion cost which is n(n+1)/2 => O(N^2)
+            //      else best case blanced tree, root is in the one of mid value(s) in sorted order, build will take O(N logN), i.e. log N for each of the N elements
+            // =====
+
+
+            // build bst tree from array
+            //  inorder_walk the bst tree, to print in ascending sorted order
+            bst_tree_print_ascending_order_sort (array)
+            
+                current_node = NULL
+                
+                // create tree
+                for each element in array:
+                    if 1st element of array:
+                        current_node = bst_tree_create_single_node(element);
+                    else:
+                        node_to_insert = bst_tree_create_single_node(element);
+                        bst_tree_insert(current_node, node_to_insert)
+                
+                // print inorder
+                inorder_walk (current_node)
+            // =====
+            // if the 1st element to insert is either smallest or biggest or near to them, the tree will be nearly single chain of node
+            //      in which case the build will take O(N^2), i.e. O(N) for each of the N elements, in actually 1,2,3...N insertion cost which is n(n+1)/2 => O(N^2)
+            //      else best case blanced tree, root is in the one of mid value(s) in sorted order, build will take O(N logN), i.e. log N for each of the N elements
+            // =====
+
+
+            /* LOOKS CORRECT, NEEDS VERFICATION */
+            // case 1: if node_to_delete has no children, then delete node_to_delete
+            // case 2: if node_to_delete has one child, link the node_to_delete's child to node_to_delete's parent, delete node_to_delete
+            // case 2: if node_to_delete has two children, find successor of node_to_delete using current_node
+            //              copy the successor's value to node_to_delete, then delete successor node
+            bst_tree_delete (current_node, node_to_delete)
+            
+                // cover both NULL
+                if node_to_delete's right == NULL
+                    if node_to_delete's parent's left == node_to_delete
+                        node_to_delete's parent's left = node_to_delete's left
+                    else // if node_to_delete's parent's right == node_to_delete
+                        node_to_delete's parent's right = node_to_delete's left
+                    return
+
+                if node_to_delete's left == NULL
+                    if node_to_delete's parent's left == node_to_delete
+                        node_to_delete's parent's left = node_to_delete's right
+                    else // if node_to_delete's parent's right == node_to_delete
+                        node_to_delete's parent's right = node_to_delete's right
+                    return
+
+                successor_node = bst_tree_successor (node_to_delete)
+                node_to_delete's key = successor_node's key
+                delete successor_node
+                return

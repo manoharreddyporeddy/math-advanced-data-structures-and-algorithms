@@ -1,0 +1,4 @@
+
+In a heap, a nodes key is greater than equal to both of its children's keys.
+heap property does not help print the nodes in sorted order because
+    this property does not tell us in which subtree the next item is
