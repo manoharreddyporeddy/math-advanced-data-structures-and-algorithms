@@ -1,5 +1,86 @@
 #include "BST.h"
 
+// BST
+//  all left childs < current node < all right childs
+//      no duplicate values
+//  On average, binary search trees with n nodes have O(log n) height.
+//      However, in the worst case, binary search trees can have O(n) height.
+// each comparison allows the operations to skip over half of the tree, so that each lookup/insertion/deletion takes time proportional to the logarithm of the number of items stored in the tree
+//      complete binary
+//      degenerate tree
+
+//          complete binary
+// self - balancing (or height - balanced) BST
+//  automatically keeps its height (maximal number of levels below the root) small
+//  in the face of arbitrary item insertions and deletions.
+//  lookup, insertion, and removal of an item in O(log n) worst - case
+//      or
+//          degenerate tree
+
+// A red–black tree
+//      BST
+//      with extra color bit of data per node,
+//          which can be either red or black.
+//      [1]The extra bit of storage ensures an approximately balanced tree by constraining 
+//          how nodes are colored from any path from the root to the leaf.[1]
+//               Thus, it is a data structure which is a type of self-balancing binary search tree.
+//      When the tree is modified, the new tree is subsequently rearranged and repainted to restore the coloring properties
+//  search, insertion, and removal of an item in O(log n)
+//      tree rearrangement and recoloring in O(log n)
+//  memory footprint    red–black tree (worst 200 MB bits/ 5 GB data+links) ~ BST (5 GB data+links)
+
+// A red–black tree is a special type of binary tree, used in computer science to organize pieces of comparable data, such as text fragments or numbers.
+
+//  BST + below requiremeents:
+//          1.A node is either red or black.
+//          2.The root is black. (This rule is sometimes omitted.Since the root can always be changed from red to black, but not necessarily vice versa, this rule has little effect on analysis.)
+//          3.All leaves(NIL) are black. (All leaves are same color as the root.)
+//          4.Every red node must have two black child nodes.
+//          5.Every path from a given node to any of its descendant NIL nodes contains the same number of black nodes.
+
+
+// AVL trees and
+// red - black trees
+//       are both forms of
+//          self - balancing binary search trees.
+// AVL tree
+// self - balancing BST
+//  the heights of the two child subtrees of any node differ by at most one;
+//      if at any time they differ by more than one, rebalancing is done to restore this property
+// Lookup, insertion, and deletion all take O(log n) time in both the average and worst cases
+//  Insertions and deletions may require the tree to be rebalanced by one or more tree rotations.
+
+//  {{{{{{{{ all level are same, last level filled a random }}}}}}}}}}}}}}}}
+//  not weight - balanced nor   mue - balanced, that is, sibling nodes can have hugely differing numbers of descendants.
+
+
+// avl vs red-black tree
+//      avl tree height < 1.44 x log base2(n + 2) - 0.328
+//      red-black tree height < 2 x log base2(n + 1)
+//  For lookup - intensive applications, AVL trees are faster than red - black trees because they are more rigidly balanced
+//  AVL trees are more rigidly balanced than red-black trees, leading to slower insertion and removal but faster retrieval.
+
+
+
+// red - black trees
+//  Lookup, insertion, and deletion all take O(log n) time in both the average and worst cases
+
+
+
+
+//  A splay tree is a binary search tree that automatically moves frequently accessed elements 
+//      nearer to the root.
+//  insertion, look - up and removal
+//      avg case - O(log n)
+//      worst case - O(log n) amortized time
+//  splaying on node => get it to root
+
+
+//  In a treap(tree heap), each node also holds a(randomly chosen) priority and
+//   the parent node has higher priority than its children.Tango trees are trees optimized
+//      for fast searches.
+
+
 // FIXME: hack to reuse in BST, only for printf format
 extern char *bintree_format;
 extern char *bintree_format_int;

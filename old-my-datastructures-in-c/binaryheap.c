@@ -1,5 +1,13 @@
 #include "binaryheap.h"
 
+// max heap
+//  parent >= child
+//  all level are same, filled from left to right
+
+// min heap
+//  parent <= child
+//  all level are same, last level filled from left to right
+
 // FIXME: hack to reuse in BST, only for printf format
 extern char *bintree_format;
 extern char *bintree_format_int;

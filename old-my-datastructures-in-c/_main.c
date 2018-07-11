@@ -17,6 +17,100 @@
 *       to get more productive, since I am used to its shortcuts
 **********************************/
 
+
+// treap
+//  numeric priority as heap, keys as bst
+// its name is a portmanteau of tree and heap
+// It is a Cartesian tree in which each key is given a(randomly chosen) numeric priority.As with any binary search tree, the inorder traversal order of the nodes is the same as the sorted order of the keys.The structure of the tree is determined by the requirement that it be heap - ordered: that is, the priority number for any non - leaf node must be greater than or equal to the priority of its children.Thus, as with Cartesian trees more generally, the root node is the maximum - priority node, and its left and right subtrees are formed in the same manner from the subsequences of the sorted order to the left and right of that node.
+//      An equivalent way of describing the treap is that it could be formed by inserting the nodes highest - priority - first into a binary search tree without doing any rebalancing
+//  search => binary search
+//  insert => generate random priority for new key, binary search, insert at null, tree rotate on priority
+//  delete => delete as in BST, tree rotate on priority
+
+//  Randomized binary search tree[edit]
+//      Rather than storing random priorities on each node, the randomized binary search tree stores 
+//          a small integer at each node, 
+//          the number of its descendants (counting itself as one); 
+//      these numbers may be maintained during tree rotation operations at only
+//          a constant additional amount of time per rotation. 
+
+// trie
+//  The term trie comes from   re trie val
+//      key = string prefixes = root is empty, childs have same common prefix
+//      values = may or may not be present with every node
+//               ()
+//               / \ 
+//            (t)   (i) 14
+//            /
+//          (te)
+//          /   \
+//    (ten) 213  (ted) 213
+
+// hash table/ hash map
+//      a structure that can    map         keys    to  values
+//      used to implement an associative array
+//  A hash table uses a 
+//      hash function to compute 
+//          an index into an 
+//              array of buckets or slots, from which the correct value can be found.
+
+//  index = f(key, array_size)
+//          hash = hashfunc(key)
+//          index = hash % array_size
+//  value = hash_table[index]
+//      index points to a bucket
+//          bucket  can have 0 to 3 entries -- seperate chaining required if >1 entries
+// B-Tree
+//  Tree (instead of Binary tree)
+//  generalization of a BST, i.e.; 2+ children
+//  B-tree is optimized for systems that 
+//      read and write large blocks of data.
+//      It is commonly used in databases and filesystems.
+// Each internal node of a B - tree will contain a number of keys.The keys act as separation values which divide its subtrees
+//      if an internal node has 3 child nodes(or subtrees) then it must have 2 keys: a1 and a2.
+//      All values in the leftmost subtree will be less than a1, all values in the middle subtree will be between a1 and a2, and
+//          all values in the rightmost subtree will be greater than a2.
+
+//  2–3 tree
+//  B-Tree
+//  Every internal node is a 2 - node or a 3 - node.
+//      internal node = node with children
+//          2-node => 2 children 1 data ele
+//          3-node => 3 children 2 data ele
+//      All leaves are at the same level.
+//      All data is kept in sorted order.
+//  move middle to parent & split
+//      insert in 2-node
+//      insert in 3-node, parent is 2-node
+//      insert in 3-node, parent is 3-node
+
+
+// AA tree
+//      balanced tree
+//          used for storing and retrieving ordered data efficiently
+//      variation of the red - black tree
+//      an enhancement to the binary search tree
+//  Unlike red-black trees
+//      red nodes on an AA tree can only be added as a right subchild.
+//      In other words, no red node can be a left sub-child.
+//  
+//  AA trees require O(log(N)) bits of metadata per node, in the form of an integer "level". 
+//  The following invariants hold for AA trees:
+// 1.The level of every leaf node is one.
+// 2.The level of every left child is exactly one less than that of its parent.
+// 3.The level of every right child is equal to or one less than that of its parent.
+// 4.The level of every right grandchild is strictly less than that of its grandparent.
+// 5.Every node of level greater than one has two children.
+
+
+
+//  In the B + tree, copies of the keys are stored in the internal nodes; the keys and records are stored in leaves; in addition, a leaf node may include a pointer to the next leaf node to speed sequential access(Comer 1979, p. 129).
+//  The B*-tree balances more neighboring internal nodes to keep the internal nodes more densely packed(Comer 1979, p. 129).This variant requires non - root nodes to be at least 2 / 3 full instead of 1 / 2 (Knuth 1998, p. 488).To maintain this, instead of immediately splitting up a node when it gets full, its keys are shared with a node next to it.When both nodes are full, then the two nodes are split into three.Deleting nodes is somewhat more complex than inserting however.
+//  B - trees can be turned into    order statistic trees   to allow rapid searches for the Nth record in key order, or counting the number of records between any two records, and various other related operations.[1]
+
+
+
+
 #include "binaryheap.h"
 int test_binaryheap()
 {
