@@ -138,7 +138,6 @@ class KnightTour {
 let a = new KnightTour();
 a.solveKT();
 
-
 /*
 
 Time Complexity looks like:
@@ -150,7 +149,7 @@ Time Complexity looks like:
 8 * 7 * 7 * ... * 7 (*7 is for 63 times)
 = 8 * (7 ^ 63)
 = 8 * (8-1) ^(64-1)
-= 8 * (8-1) ^(n*m-1)
-= 8 ^ (n*m) approx
+= 8 * (8-1) ^(r*c-1)
+= 8 ^ (r*c) approx      -- r and c  are  # of rows & columns of matrix
 
 */
