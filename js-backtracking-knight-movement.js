@@ -51,6 +51,40 @@ class KnightTour {
         );
     }
 
+    // returns fals e, if no complete tour is possible,
+    // return tru e, prints the tour.
+    //      multiple solutions may exist - after 1 solution found, exit
+    solveKT() {
+        //
+
+        for (let x = 0; x < this.N; x++) {
+            for (let y = 0; y < this.N; y++) {
+                this.aa[x][y] = -1;
+            }
+        }
+
+        // Knight is initially at the first block
+        this.aa[0][0] = 0;
+
+        /*
+             0	-1	-1	-1	-1	-1	-1	-1
+            -1	-1	-1	-1	-1	-1	-1	-1
+            -1	-1	-1	-1	-1	-1	-1	-1
+            -1	-1	-1	-1	-1	-1	-1	-1
+            -1	-1	-1	-1	-1	-1	-1	-1
+            -1	-1	-1	-1	-1	-1	-1	-1
+            -1	-1	-1	-1	-1	-1	-1	-1
+            -1	-1	-1	-1	-1	-1	-1	-1
+        */
+
+        // start from 0,0 and explore all tours
+        if (this.solveKTUtil(0, 0, 1)) {
+            this.printSolution();
+        } else {
+            console.log("Solution does not exist");
+        }
+    }
+
     solveKTUtil(x, y, movei) {
         if (movei == this.N * this.N) return true;
 
@@ -89,40 +123,6 @@ class KnightTour {
         }
 
         return false;
-    }
-
-    // returns fals e, if no complete tour is possible,
-    // return tru e, prints the tour.
-    //      multiple solutions may exist - after 1 solution found, exit
-    solveKT() {
-        //
-
-        for (let x = 0; x < this.N; x++) {
-            for (let y = 0; y < this.N; y++) {
-                this.aa[x][y] = -1;
-            }
-        }
-
-        // Knight is initially at the first block
-        this.aa[0][0] = 0;
-
-        /*
-             0	-1	-1	-1	-1	-1	-1	-1
-            -1	-1	-1	-1	-1	-1	-1	-1
-            -1	-1	-1	-1	-1	-1	-1	-1
-            -1	-1	-1	-1	-1	-1	-1	-1
-            -1	-1	-1	-1	-1	-1	-1	-1
-            -1	-1	-1	-1	-1	-1	-1	-1
-            -1	-1	-1	-1	-1	-1	-1	-1
-            -1	-1	-1	-1	-1	-1	-1	-1
-        */
-
-        // start from 0,0 and explore all tours
-        if (this.solveKTUtil(0, 0, 1)) {
-            this.printSolution();
-        } else {
-            console.log("Solution does not exist");
-        }
     }
 
     printSolution() {
