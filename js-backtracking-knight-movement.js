@@ -137,3 +137,20 @@ class KnightTour {
 
 let a = new KnightTour();
 a.solveKT();
+
+
+/*
+
+Time Complexity looks like:
+
+- 1st move 8 possibilities
+- From 2nd move <=7 possibilities, since we don't go back to same position.
+-- There are 63 moves like 2nd move.
+
+8 * 7 * 7 * ... * 7 (*7 is for 63 times)
+= 8 * (7 ^ 63)
+= 8 * (8-1) ^(64-1)
+= 8 * (8-1) ^(n*m-1)
+= 8 ^ (n*m) approx
+
+*/
