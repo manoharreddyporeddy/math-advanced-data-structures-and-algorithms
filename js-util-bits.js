@@ -59,3 +59,7 @@ class BitManip {
 
     */
 }
+
+
+//     let o1 = new BitManip(682);
+//     let act = o1.setKthIndexBit(0); // 683
