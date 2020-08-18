@@ -1,5 +1,5 @@
 //
-// ht tp s://www.geeksforgeeks.org/binary-heap/
+// https://www.ge e ksforgeeks.org/binary-heap/
 //
 // A class for Min Heap
 class MinHeap {
