@@ -118,7 +118,7 @@ class MinHeap {
 
     test() {
 
-        // new MinHeap(11).test();
+        // new MinHeap().test();
 
         let o1 = new MinHeap(11);
 
@@ -149,7 +149,7 @@ class MinHeap {
         console.log("decreaseKey 2,1 , ", o1.a, ", ", o1.getMin());
 
         /*
-        // new MinHeap(11).test();
+        // new MinHeap().test();
 
         // operation parameters,   arr,                   getMin
             insertKey 3,           [ 3 ] ,                 3
@@ -166,4 +166,4 @@ class MinHeap {
     }
 }
 
-// new MinHeap(11).test();
+// new MinHeap().test();
