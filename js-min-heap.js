@@ -8,7 +8,7 @@
 // https://github.com/manoharreddyporeddy/math-advanced-data-structures-and-algorithms
 
 /*
-		min heap1		min heap2				min heap3					MAX heap1
+        min heap1        min heap2                min heap3                    MAX heap1
           10                 10                       1                           100       
        /      \          /       \                /         \                  /      \     
      20        100     15         30            2            3               19        36   
