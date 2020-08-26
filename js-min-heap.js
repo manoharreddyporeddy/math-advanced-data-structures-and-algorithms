@@ -1,6 +1,24 @@
-//
-// https://www.ge e ksforgeeks.org/binary-heap/
-//
+// https://en.wikipedia.org/wiki/Heap_(data_structure)
+// https://en.wikipedia.org/wiki/Binary_heap
+// https://www.g ee ksforgeeks.org/binary-heap/
+
+// https://courses.cs.washington.edu/courses/cse373/18wi/files/slides/lecture-14-ann.pdf
+// 	https://users.cs.duke.edu/~reif/courses/alglectures/skiena.lectures/lecture4.pdf
+
+// https://github.com/manoharreddyporeddy/math-advanced-data-structures-and-algorithms
+
+/*
+		min heap1		min heap2				min heap3					MAX heap1
+          10                 10                       1                           100       
+       /      \          /       \                /         \                  /      \     
+     20        100     15         30            2            3               19        36   
+    /                 /  \        /  \        /   \         /  \           /    \     /  \  
+  30                40    50    100   40    17    19       36   7        17      3   25   1 
+                                                  / \                         /   \                
+                                                25  100                      2     7               
+
+*/
+
 // A class for Min Heap
 class MinHeap {
     // Constructor: Builds a heap from a given array a[] of given size
