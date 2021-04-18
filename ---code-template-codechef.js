@@ -1,14 +1,22 @@
+// NODEJS (Node 7.4.0) common template for everyone
+
+// Common code for all problems below
 let inputStr = "";
 const _toInt = (x) => +x;
 process.stdin.resume();
 process.stdin.setEncoding("utf8");
 process.stdin.on("data", (chunk) => (inputStr += chunk));
 
-// NODEJS common template for everyone - problem FLOW001
+// problem START01
+process.stdin.on("end", () => {
+    console.log(+inputStr);
+});
+
+// problem FLOW001
 process.stdin.on("end", () => {
     const inputLinesArr = inputStr.split("\n");
 
-    var T = +inputLinesArr[0]; // # of tests
+    let T = +inputLinesArr[0]; // # of tests
 
     for (let i = 1; i <= T; i++) {
         let [a, b] = inputLinesArr[i].split(" ").map(_toInt); // each test case
@@ -17,7 +25,25 @@ process.stdin.on("end", () => {
     }
 });
 
-// NODEJS common template for everyone - problem HS08TEST
+// problem FLOW001
+process.stdin.on("end", () => {
+    const inputLinesArr = inputStr.split("\n");
+
+    let [n, k] = inputLinesArr[0].split(" ").map(_toInt);
+
+    let count = 0;
+
+    for (let i = 1; i <= n; i++) {
+        let ti = +inputLinesArr[i];
+        if (ti % k === 0) {
+            count++;
+        }
+    }
+
+    console.log(count);
+});
+
+// problem HS08TEST
 process.stdin.on("end", () => {
     let [a, b] = inputStr.split(" ").map(_toInt); // each test case
 
