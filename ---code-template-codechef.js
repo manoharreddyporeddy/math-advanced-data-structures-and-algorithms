@@ -6,12 +6,12 @@ process.stdin.on("data", (chunk) => (inputStr += chunk));
 
 // NODEJS common template for everyone - problem FLOW001
 process.stdin.on("end", () => {
-    const INPUT_LINES__ARR = inputStr.split("\n");
+    const inputLinesArr = inputStr.split("\n");
 
-    var T = +INPUT_LINES__ARR[0]; // # of tests
+    var T = +inputLinesArr[0]; // # of tests
 
     for (let i = 1; i <= T; i++) {
-        let [a, b] = INPUT_LINES__ARR[i].split(" ").map(_toInt); // each test
+        let [a, b] = inputLinesArr[i].split(" ").map(_toInt); // each test
 
         console.log(a + b);
     }
