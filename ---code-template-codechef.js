@@ -1,18 +1,18 @@
 // NODEJS (Node 7.4.0) common template for everyone
 
-// Common code for all problems below
+// NOTE: This is common code - MUST be there for all problems below
 let inputStr = "";
 const _toInt = (x) => +x;
 process.stdin.resume();
 process.stdin.setEncoding("utf8");
 process.stdin.on("data", (chunk) => (inputStr += chunk));
 
-// problem START01
+// problem https://www.codechef.com/problems/START01
 process.stdin.on("end", () => {
     console.log(+inputStr);
 });
 
-// problem FLOW001
+// problem https://www.codechef.com/problems/FLOW001
 process.stdin.on("end", () => {
     const inputLinesArr = inputStr.split("\n");
 
@@ -25,7 +25,7 @@ process.stdin.on("end", () => {
     }
 });
 
-// problem FLOW001
+// problem https://www.codechef.com/problems/INTEST
 process.stdin.on("end", () => {
     const inputLinesArr = inputStr.split("\n");
 
@@ -43,7 +43,7 @@ process.stdin.on("end", () => {
     console.log(count);
 });
 
-// problem HS08TEST
+// problem https://www.codechef.com/problems/HS08TEST
 process.stdin.on("end", () => {
     let [a, b] = inputStr.split(" ").map(_toInt); // each test case
 
