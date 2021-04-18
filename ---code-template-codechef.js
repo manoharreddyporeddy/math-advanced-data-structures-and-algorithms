@@ -19,3 +19,27 @@ const main = (INPUT_LINE_ARRAY) => {
         console.log(a + b);
     }
 };
+
+
+// ------------------------------------------------
+
+// NODEJS common template for everyone - problem HS08TEST
+var inputStr = "";
+const _toInt = (x) => +x;
+process.stdin.resume();
+process.stdin.setEncoding("utf8");
+process.stdin.on("data", (chunk) => (inputStr += chunk));
+process.stdin.on("end", () => {
+    let [a, b] = inputStr.split(" ").map(_toInt);
+
+    let res = b - a - 0.5;
+    if (a % 5 === 0 && res >= 0) {
+        // all good
+    } else {
+        res = b;
+    }
+
+    console.log(res);
+});
+
+// ------------------------------------------------
