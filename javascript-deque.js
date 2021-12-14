@@ -16,7 +16,7 @@ class Deque {
     back = () => this.values[this.size() - 1];
     push_back = (x) => this.values.push(x);
     pop_back = () => this.values.pop();
-    
+
     front = () => this.values[0];
     push_front = (x) => this.values.unshift(x); // to be tested
     pop_front = () => this.values.shift();
@@ -28,9 +28,19 @@ function use() {
     q.push_back(10);
     q.push_back(20);
 
-    console.log(q.front())
-    console.log(q.back())
+    console.log(q.size()); //      2 // Output
+    console.log(q.isEmpty()); //   false
 
-    console.log(q.pop_front())
-    console.log(q.pop_back())
+    console.log(q.front()); //     10
+    console.log(q.back()); //      20
+
+    console.log(q.pop_front()); // 10
+    console.log(q.front()); //     20
+    console.log(q.back()); //      20
+
+    console.log(q.pop_back()); //  20
+    console.log(q.front()); //     undefined
+    console.log(q.back()); //      undefined
 }
+
+use();
