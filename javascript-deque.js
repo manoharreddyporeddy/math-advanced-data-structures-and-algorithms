@@ -27,18 +27,20 @@ function use() {
 
     q.push_back(10);
     q.push_back(20);
-
-    console.log(q.size()); //      2 // Output
+    console.log(q.size()); //      2      // output
     console.log(q.isEmpty()); //   false
-
     console.log(q.front()); //     10
     console.log(q.back()); //      20
 
     console.log(q.pop_front()); // 10
+    console.log(q.size()); //      1
+    console.log(q.isEmpty()); //   false
     console.log(q.front()); //     20
     console.log(q.back()); //      20
 
     console.log(q.pop_back()); //  20
+    console.log(q.size()); //      0
+    console.log(q.isEmpty()); //   true
     console.log(q.front()); //     undefined
     console.log(q.back()); //      undefined
 }
