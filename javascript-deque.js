@@ -13,11 +13,24 @@ class Deque {
     size = () => this.values.length;
     isEmpty = () => this.size() === 0;
 
-    front = () => this.values[0];
-    push_front = (x) => this.values.unshift(x); // untested
-    pop_front = () => this.values.shift();
-
     back = () => this.values[this.size() - 1];
     push_back = (x) => this.values.push(x);
     pop_back = () => this.values.pop();
+    
+    front = () => this.values[0];
+    push_front = (x) => this.values.unshift(x); // to be tested
+    pop_front = () => this.values.shift();
+}
+
+function use() {
+    let q = new Deque();
+
+    q.push_back(10);
+    q.push_back(20);
+
+    console.log(q.front())
+    console.log(q.back())
+
+    console.log(q.pop_front())
+    console.log(q.pop_back())
 }
